@@ -15,12 +15,9 @@ export class AccountComponent  {
     });
   }
 
-  onSubmit() {
+  onSubmit()      {
     if(this.loginForm.valid) {
-      console.log(this._v());
+      console.log(this.loginForm)
     }
-  }
-  _v() {
-    return this.loginForm.value;
   }
 }
