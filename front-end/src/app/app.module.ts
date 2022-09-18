@@ -3,19 +3,20 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AccountComponent } from './account/account.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AccountModule } from './account/account.module';
+import { SignUpComponent } from './pages/sign-up/sign-up.component';
+import { AccountComponent } from './pages/account/account.component';
 
 @NgModule({
   declarations: [
-    AppComponent ],
+    AppComponent,
+    SignUpComponent,
+    AccountComponent ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    AccountModule
   ],
   providers: [],
   bootstrap: [AppComponent]
