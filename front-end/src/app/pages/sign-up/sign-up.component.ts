@@ -12,6 +12,7 @@ export class SignUpComponent {
   loginForm: FormGroup;
   openRegisterForm = false;
   periods = PERIODS;
+
   constructor() {
     this.loginForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
@@ -20,7 +21,7 @@ export class SignUpComponent {
       registrationNumber: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required]),
       passwordConfirm: new FormControl('', [Validators.required]),
-      period: new FormControl('', [Validators.required])
+      period: new FormControl('')
     });
   }
 
