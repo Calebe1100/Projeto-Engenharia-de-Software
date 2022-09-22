@@ -6,3 +6,5 @@
 ### npm install --save-dev nodemon
 
 ### npm install --save pg pg-hstore
+
+### npm install dotenv

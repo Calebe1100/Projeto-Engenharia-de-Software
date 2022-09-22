@@ -1,17 +1,22 @@
-const { Sequelize } = require('sequelize');
-const {username, password, database} = require('../config/credentialsDB');
+import { Sequelize } from "sequelize";
+import dotenv from "dotenv/config.js";
 
-const sequelize = new Sequelize(database, username, password, {
-    host: 'localhost',
+const dbName = process.env.DB_NAME; // passar os dados do .env para as constantes
+const dbUser = process.env.DB_USER;
+const dbHost = process.env.DB_HOST;
+const dbPassword = process.env.DB_PASSWORD;
+
+const sequelize = new Sequelize(dbName, dbUser, dbPassword, {
+    host: dbHost,
     dialect: 'postgres'
 });
 
 sequelize.authenticate()
 .then(() => {
-    console.log('Conexão com o banco de dados criada com sucesso.');
+    console.log('Conexão criada com sucesso.');
 })
 .catch(() => {
-    console.log('Conexão com o banco de dados falhou.');
+    console.log('Falha de conexão! Contate o suporte.');
 });
 
-module.exports = sequelize;
+export default sequelize;

@@ -1,11 +1,10 @@
-const express = require('express');
+import express from "express";
+import routes from "./api/routes";
+
 const app = express();
 
-const db = require('./models/db');
-
-app.get("/", async (req, res) => {
-    res.send("Página inicial");
-});
+app.use(express.json());
+app.use(routes);
 
 var port = 3000;
 
