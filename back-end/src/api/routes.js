@@ -1,5 +1,5 @@
 import express from "express";
-import users from "src/api/controllers/userController";
+import users from "../api/controllers/usersController";
 
 const routes = express.Router();
 

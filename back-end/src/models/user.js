@@ -1,4 +1,4 @@
-import { Sequelize } from "sequelize";
+import { Sequelize, DataTypes } from "sequelize";
 import db from "./db";
 
 export default db.define("user", {
