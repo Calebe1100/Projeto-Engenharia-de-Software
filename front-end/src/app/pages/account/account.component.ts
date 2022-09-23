@@ -8,6 +8,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class AccountComponent  {
   loginForm: FormGroup;
+  openRegisterForm = false;
   constructor() {
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -15,7 +16,7 @@ export class AccountComponent  {
     });
   }
 
-  onSubmit()      {
+  onSubmit() {
     if(this.loginForm.valid) {
       console.log(this.loginForm)
     }

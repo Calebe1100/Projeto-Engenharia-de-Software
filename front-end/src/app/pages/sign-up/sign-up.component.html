@@ -1,0 +1,55 @@
+<div class="container">
+    <h4 class="text-center">Login - CefetRoadMap</h4>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
+        <div class="form-group">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Nome</label>
+                <input type="name" class="form-control" formControlName="name" placeholder="Name">
+            </div>
+    
+            <div class="form-group">
+                <label for="exampleInputPassword1">Data de Nascimento</label>
+                <input type="date" class="form-control" formControlName="birthData" placeholder="Name">
+            </div>
+
+            <label for="exampleInputEmail1">Email</label>
+            <input type="email" class="form-control" formControlName="email" placeholder="Email">
+            <small class="form-text-validator" 
+            *ngIf="loginForm.controls.email.touched && loginForm.controls.email.errors?.required">
+                Por favor digite seu email!
+            </small>
+    
+            <small class="form-text-validator"
+            *ngIf="loginForm.controls.email.touched && loginForm.controls.email.errors?.email">
+            Email digitado com formato inválido!
+            </small>
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputPassword1">Número de Matrícula</label>
+            <input class="form-control" formControlName="registrationNumber" placeholder="Matrícula">
+        </div>
+
+        
+        <div class="form-group">
+            <label for="exampleInputPassword1">Senha</label>
+            <input type="password" class="form-control" formControlName="password" placeholder="Senha">
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputPassword1">Confirmar Senha</label>
+            <input type="password" class="form-control" formControlName="passwordConfirm" placeholder="Confirmar Senha">
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputPassword1" class="mr-3">Período</label>
+        <select formControlName="period" class="form-control">
+            <option *ngFor="let period of periods" [ngValue]="period">
+              {{ period }}
+            </option>
+          </select>
+        </div>
+    </form>
+    <button  class="btn btn-primary" routerLink="/sign-up">Registre-se </button>
+    <a routerLink="/account" class="d-flex justify-content-center mt-3">Entrar</a>
+  </div>
