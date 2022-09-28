@@ -19,4 +19,6 @@ sequelize.authenticate()
     console.log('Falha de conexão! Contate o suporte.');
 });
 
+sequelize.sync();
+
 export default sequelize;

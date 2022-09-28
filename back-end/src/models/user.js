@@ -1,7 +1,7 @@
 import { Sequelize, DataTypes } from "sequelize";
 import db from "./db";
 
-export default db.define("user", {
+export default db.define("users", {
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
@@ -33,4 +33,14 @@ export default db.define("user", {
     type: DataTypes.STRING,
     allowNull: true,
   },
+}, 
+{
+  // don't add the timestamp attributes (updatedAt, createdAt)
+  timestamps: false,
+
+  // If don't want createdAt
+  createdAt: false,
+
+  // If don't want updatedAt
+  updatedAt: false
 });
