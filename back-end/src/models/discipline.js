@@ -1,7 +1,8 @@
 import { Sequelize, DataTypes } from "sequelize";
 import db from "./db";
+import Course from "./course";
 
-export default db.define("user", {
+ const discipline = db.define("discipline", {
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
@@ -11,28 +12,14 @@ export default db.define("user", {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  email: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    unique: true,
-  },
-  password: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    unique: true,
-  },
-  registration: {
-    type: DataTypes.STRING,
+  workload: {
+    type: DataTypes.INTEGER,
     allowNull: false,
   },
-  birth_date: {
-    type: DataTypes.DATEONLY,
-    allowNull: false,
-  },
-  period: {
+  description: {
     type: DataTypes.STRING,
     allowNull: true,
-  },
+  }
 }, 
 {
   // don't add the timestamp attributes (updatedAt, createdAt)
@@ -46,3 +33,12 @@ export default db.define("user", {
 
   freezeTableName: true
 });
+
+discipline.belongsTo(Course, {
+  constraint: true,
+  foreignKey: 'idCourse',
+  onDelete: 'CASCADE',
+  allowNull: false
+});
+
+export default discipline;

@@ -8,3 +8,8 @@
 ### npm install --save pg pg-hstore
 
 ### npm install dotenv
+
+### npx sequelize-cli db:create
+### npx sequelize-cli migration:generate --name create-name
+### npx sequelize-cli db:migrate
+### npx sequelize-cli db:seed:all

@@ -1,10 +1,10 @@
-import UserRepository from "../../models/user";
+import DisciplinesRepository from "../../models/discipline";
 import bcrypt from 'bcryptjs';
 import yup from 'yup';
 
 async function findAll(req, res) {
 
-  UserRepository.findAll().then(data => {
+  DisciplinesRepository.findAll().then(data => {
     res.send(data);
   })
   .catch(err => {
@@ -55,29 +55,23 @@ async function store(req, res) {
    /**
     * Desestrutuação dos dados da requisição
     */
-  const { name, email, password, registration, birth_date } = req.body;
+  const { name, workload, description, idCourse } = req.body;
 
   /**
     * criação da constante data
     */
   
 
-  const data = { name, email, password, registration, birth_date };
-
-  /**
-    * Criptografar a senha
-    */
-
-  data.password = await bcrypt.hash(data.password, 8);
+  const data = { name, workload, description, idCourse };
 
   /**
     * Inserção no banco de dados 
     */
 
-  await UserRepository.create(data).then((res) => {
+  await DisciplinesRepository.create(data).then((res) => {
         return res.status(200).json({
         error: false,
-        message: "Usuário Cadastrado com sucesso"
+        message: "Disciplina cadastrada com sucesso"
       })
   })
   
