@@ -27,21 +27,21 @@ import User from "./user ";
   freezeTableName: true
 });
 
-UserDisciplineCourse.belongsTo(Course, {
+UserCourseDiscipline.belongsTo(Course, {
   constraint: true,
   foreignKey: 'idCourse',
   onDelete: 'CASCADE',
   allowNull: false,
 });
 
-UserDisciplineCourse.belongsTo(Discipline, {
+UserCourseDiscipline.belongsTo(Discipline, {
   constraint: true,
   foreignKey: 'idDiscipline',
   onDelete: 'CASCADE',
   allowNull: false,
 });
 
-UserDisciplineCourse.belongsTo(User, {
+UserCourseDiscipline.belongsTo(User, {
   constraint: true,
   foreignKey: 'idUser',
   onDelete: 'CASCADE',
@@ -49,4 +49,4 @@ UserDisciplineCourse.belongsTo(User, {
 });
 
 
-export default UserDisciplineCourse;
+export default UserCourseDiscipline;
