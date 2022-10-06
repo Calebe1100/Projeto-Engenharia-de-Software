@@ -13,3 +13,10 @@
 ### npx sequelize-cli migration:generate --name create-name
 ### npx sequelize-cli db:migrate
 ### npx sequelize-cli db:seed:all
+
+-----------Paleta de cores-------
+.color1 { #4e91ce };
+.color2 { #93b4da };
+.color3 { #0b4590 };
+.color4 { #5983a7 };
+.color5 { #cdbea1 }; 

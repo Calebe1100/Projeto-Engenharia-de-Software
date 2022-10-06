@@ -2,7 +2,8 @@ import express from "express";
 import users from "../api/controllers/usersController";
 import login from "../api/controllers/loginController";
 import courses from "../api/controllers/coursesController";
-import disciplines from "../api/controllers/disciplinesController";
+import systemDisciplines from "../api/controllers/systemDisciplinesController";
+import userDisciplines from "../api/controllers/userDisciplinesController";
 
 const routes = express.Router();
 
@@ -17,8 +18,12 @@ routes.post("/login", login.login);
 routes.get("/courses", courses.findAll);
 routes.post("/courses", courses.store);
 
-/*-----------Discipline-------------*/
-routes.get("/disciplines", disciplines.findAll);
-routes.post("/disciplines", disciplines.store);
+/*-----------UserDisciplines-------------*/
+routes.get("/disciplines", userDisciplines.findAll);
+routes.post("/disciplines", userDisciplines.store);
+
+/*-----------SystemDisciplines-------------*/
+routes.get("/system-disciplines", systemDisciplines.findAll);
+routes.post("/system-disciplines", systemDisciplines.store);
 
 export { routes as default };
