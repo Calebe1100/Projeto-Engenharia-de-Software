@@ -1,24 +1,25 @@
 import { NgModule } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SignUpComponent } from './pages/sign-up/sign-up.component';
-import { AccountComponent } from './pages/account/account.component';
+import { PagesModule } from './pages/pages.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SignUpComponent,
-    AccountComponent ],
+  ],
   imports: [
+    PagesModule,
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
-    ReactiveFormsModule,
-    FormsModule,
+    FlexLayoutModule
   ],
   providers: [],
+  exports: [PagesModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

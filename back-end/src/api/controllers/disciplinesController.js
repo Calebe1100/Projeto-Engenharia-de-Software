@@ -7,12 +7,54 @@ async function findAll(req, res) {
   DisciplinesRepository.findAll().then(data => {
     res.send(data);
   })
-  .catch(err => {
-    res.status(500).send({
-      message:
-        err.message || "Some error occurred while retrieving tutorials."
-    });
-})
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving tutorials."
+      });
+    })
+}
+
+async function update(req, res) {
+  /**
+     * Desestrutuação dos dados da requisição
+     */
+  const { name, workload, description, idCourse } = req.body;
+
+  /**
+    * criação da constante data
+    */
+
+
+  const data = { name, workload, description, idCourse };
+
+  await DisciplinesRepository.update(data).then((res) => {
+    return res.status(200).json({
+      error: false,
+      message: "Disciplina atualizada com sucesso"
+    })
+  })
+}
+
+async function drop(req, res) {
+  /**
+     * Desestrutuação dos dados da requisição
+     */
+  const { name, workload, description, idCourse } = req.body;
+
+  /**
+    * criação da constante data
+    */
+
+
+  const data = { name, workload, description, idCourse };
+
+  await DisciplinesRepository.drop(data).then((res) => {
+    return res.status(200).json({
+      error: false,
+      message: "Disciplina deletada com sucesso"
+    })
+  })
 }
 
 async function store(req, res) {
@@ -28,16 +70,16 @@ async function store(req, res) {
   // });
 
   // if(!(await schema.isValid(req.body))){
-    // return res.status(400).json({
-    //   error: true,
-    //   message: "Dados inválidos"
-    // })
+  // return res.status(400).json({
+  //   error: true,
+  //   message: "Dados inválidos"
+  // })
   // }
 
-   /**
-   * Validação através do YUP schema
-   * fim
-   */
+  /**
+  * Validação através do YUP schema
+  * fim
+  */
 
   /**
    * Validação no banco de dados
@@ -52,15 +94,15 @@ async function store(req, res) {
   //   })
   // }
 
-   /**
-    * Desestrutuação dos dados da requisição
-    */
+  /**
+   * Desestrutuação dos dados da requisição
+   */
   const { name, workload, description, idCourse } = req.body;
 
   /**
     * criação da constante data
     */
-  
+
 
   const data = { name, workload, description, idCourse };
 
@@ -69,12 +111,12 @@ async function store(req, res) {
     */
 
   await DisciplinesRepository.create(data).then((res) => {
-        return res.status(200).json({
-        error: false,
-        message: "Disciplina cadastrada com sucesso"
-      })
+    return res.status(200).json({
+      error: false,
+      message: "Disciplina cadastrada com sucesso"
+    })
   })
-  
+
 }
 
 export default { findAll, store };

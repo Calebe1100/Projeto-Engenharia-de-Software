@@ -21,7 +21,7 @@
       <input type="password" class="form-control" formControlName="password" placeholder="Senha">
     </div>
     <div class="buttons-submit">
-      <button type="submit" class="btn btn-primary mr-2" [disabled]="!loginForm.valid">Entrar</button>
+      <button type="submit" class="btn btn-primary mr-2" [disabled]="!loginForm.valid" [routerLink]="['../disciplines-register']">Entrar</button>
       <a routerLink="/sign-up">Registre-se </a>  
     </div>
   </form>

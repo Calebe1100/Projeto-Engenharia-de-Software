@@ -1,0 +1,41 @@
+<div class="m-3 w-full h-full" fxLayout="column" fxLayoutGap="15px">
+    <mat-form-field class="w-full min-w-50" fxLayoutAlign="center center">
+        <input matInput (keyup.enter)="
+                        searchInput('$event.target.value')
+                    " [formControl]="searchInputControl" [autocomplete]="'off'" placeholder="Pesquisar disciplina" />
+        <button matSuffix mat-icon-button class="icon-size-5">
+            <mat-icon>search</mat-icon>
+        </button>
+    </mat-form-field>
+
+    <div class="w-full min-w-50" fxLayoutAlign="center stretch">
+        <div class="w-75 min-w-50" fxLayoutAlign="end stretch" fxLayout="column" fxLayoutGap="15px">
+            <mat-card class="w-full min-w-50">
+                <div *ngIf="displayDisciplinesList;else noDisciplines" fxFill fxLayout="column">
+                    <ngx-datatable class="material scrolling">
+
+                        <ngx-datatable-column *ngIf="" prop="discipline" name="'teste'">
+                            <ng-template let-column="nomeUltimoRevisorJuridico" ngx-datatable-header-template>
+                            </ng-template>
+                            <ng-template let-value="value" ngx-datatable-cell-template>
+                                {{value}}
+                            </ng-template>
+                        </ngx-datatable-column>
+
+                    </ngx-datatable>
+                </div>
+            </mat-card>
+            <div fxLayoutAlign="end center">
+                <button mat-button style="background-color: #D9D9D9;" (click)="openDialog()">Cadastrar
+                    disciplina</button>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <ng-template #noDisciplines>
+        <div class="text-center">Não possui disciplinas cadastradas</div>
+    </ng-template>
+</div>

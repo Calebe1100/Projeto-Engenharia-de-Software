@@ -20,5 +20,7 @@ routes.post("/courses", courses.store);
 /*-----------Discipline-------------*/
 routes.get("/disciplines", disciplines.findAll);
 routes.post("/disciplines", disciplines.store);
+routes.put("/disciplines", disciplines.update)
+routes.delete("/disciplines", disciplines.drop)
 
 export { routes as default };
