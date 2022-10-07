@@ -4,12 +4,12 @@ import yup from 'yup';
 async function findAll(req, res) {
 
   SystemDisciplinesRepository.findAll().then(data => {
-    res.send(data);
-  })
-  .catch(err => {
-    res.status(500).send({
-      message:
-        err.message || "Some error occurred while retrieving tutorials."
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving tutorials."
     });
 })
 }
@@ -17,11 +17,11 @@ async function findAll(req, res) {
 async function store(req, res) {
 
   let schema = yup.object({
-    idCourse: yup.int().required(),
-    idUser: yup.int().required(),
+    id: yup.int().required(),
     name: yup.string().required(),
     workload: yup.string().required(),
-    description: yup.string().required()
+    description: yup.string().required(),
+    idCourse: yup.int().required()
   });
 
   if(!(await schema.isValid(req.body))){

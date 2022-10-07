@@ -2,7 +2,7 @@ import { Sequelize, DataTypes } from "sequelize";
 import db from "./db";
 import Course from "./course";
 import Discipline from "./discipline";
-import User from "./user ";
+import User from "./user";
 
  const UserCourseDiscipline = db.define("user_course_discipline", {
   init_date: {

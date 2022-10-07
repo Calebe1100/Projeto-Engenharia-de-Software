@@ -21,9 +21,7 @@ module.exports = {
         allowNull: true,
       },
       idCourse: {
-        type: Sequelize.UUID,
-        references: { model: 'course', key: 'id'},
-        onDelete: 'CASCADE'
+        type: Sequelize.INTEGER,
       }
     });
     
