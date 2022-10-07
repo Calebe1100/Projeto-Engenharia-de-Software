@@ -19,6 +19,11 @@ import Course from "./course";
   description: {
     type: DataTypes.STRING,
     allowNull: true,
+  },
+  idCourse: {
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
+    primaryKey: true,
   }
 }, 
 {
@@ -32,13 +37,6 @@ import Course from "./course";
   updatedAt: false,
 
   freezeTableName: true
-});
-
-discipline.belongsTo(Course, {
-  constraint: true,
-  foreignKey: 'idCourse',
-  onDelete: 'CASCADE',
-  allowNull: false
 });
 
 export default discipline;

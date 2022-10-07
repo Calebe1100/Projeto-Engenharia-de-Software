@@ -1,5 +1,4 @@
 import CoursesRepository from "../../models/course";
-import bcrypt from 'bcryptjs';
 import yup from 'yup';
 
 async function findAll(req, res) {
@@ -17,58 +16,36 @@ async function findAll(req, res) {
 
 async function store(req, res) {
 
-  /**
-   * Validação através do YUP schema
-   * Início
-   */
-  // let schema = yup.object.shape({
-  //   name: yup.string().required(),
-  //   email: yup.string().email().required(),
-  //   password: yup.string().required()
-  // });
+  let schema = yup.object.shape({
+    name: yup.string().required(),
+    mandatory_workload: yup.int().required(),
+    optional_workload: yup.int().required(),
+    complementary_workload: yup.int().required(),
+    description: yup.string().required()
+  });
 
-  // if(!(await schema.isValid(req.body))){
-    // return res.status(400).json({
-    //   error: true,
-    //   message: "Dados inválidos"
-    // })
-  // }
+  if(!(await schema.isValid(req.body))){
+    return res.status(400).json({
+      error: true,
+      message: "Dados inválidos"
+    })
+  }
 
-   /**
-   * Validação através do YUP schema
-   * fim
-   */
 
-  /**
-   * Validação no banco de dados
-   * Verifica se o usuário existe
-   */
+  let courseExist = await Course.findOne({ where :{ name: req.body.name} });
+  if(courseExist) {
+    return res.status(400).json({
+      error: true,
+      message: "Este curso já existe!"
+    })
+  }
 
-  // let userExist = await UserRepository.findOne({ email: req.body.email });
-  // if(userExist) {
-  //   return res.status(400).json({
-  //     error: true,
-  //     message: "Este usuário já existe!"
-  //   })
-  // }
-
-   /**
-    * Desestrutuação dos dados da requisição
-    */
   const { name, mandatory_workload, optional_workload, complementary_workload, description } = req.body;
-
-  /**
-    * criação da constante data
-    */
-  
 
   const data = {  name, mandatory_workload, optional_workload, complementary_workload, description };
 
-  /**
-    * Inserção no banco de dados 
-    */
 
-  await CoursesRepository.create(data).then((resp) => {
+  await CoursesRepository.create(data).then((res) => {
    
         return res.status(200).json({
         error: false,

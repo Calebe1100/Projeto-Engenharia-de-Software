@@ -3,7 +3,7 @@ import db from "./db";
 
 export default db.define("course", {
   id: {
-    type: DataTypes.UUID,
+    type: DataTypes.INTEGER,
     defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
   },
