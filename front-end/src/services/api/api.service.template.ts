@@ -39,7 +39,7 @@ export class ApiServiceTemplate {
 			);
 	}
 
-	create(endpointUrl: string, body: unknown): Observable<HttpResponse<unknown>> {
+	post(endpointUrl: string, body: unknown): Observable<HttpResponse<unknown>> {
 		return this.httpClient.post(endpointUrl, body, {
 			observe: 'response',
 		});
