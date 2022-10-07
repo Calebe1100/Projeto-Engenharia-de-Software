@@ -15,3 +15,7 @@
   .ngx-datatable.material.scroll-vertical {
     height: 40vh;
   }
+
+  .ngx-datatable.fixed-row .datatable-scroll .datatable-body-row .datatable-body-cell, .ngx-datatable.fixed-row .datatable-scroll .datatable-body-row .datatable-body-group-cell {
+    margin: 10px !important; 
+  }

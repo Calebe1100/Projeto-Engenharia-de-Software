@@ -10,32 +10,39 @@
 
     <div class="w-full min-w-50" fxLayoutAlign="center stretch">
         <div class="w-75 min-w-50" fxLayoutAlign="end stretch" fxLayout="column" fxLayoutGap="15px">
-            <mat-card class="w-full min-w-50">
+            <mat-card class="w-full min-w-50 h-full">
                 <div *ngIf="listDiscipline; else noDisciplines" fxFill fxLayout="column">
-                    <ngx-datatable class="material scrolling" [rows]="listDiscipline" >
+                    <ngx-datatable class="material scrolling" [ngClass]="tablestyle" [rows]="listDiscipline"
+                        [columnMode]="'force'" [scrollbarH]="true" [scrollbarV]="true" [reorderable]="false">
 
-                        <ngx-datatable-column  prop="SystemDiscipline" name="'Nome'">
-                            <ng-template let-column="name" ngx-datatable-header-template>
-                            </ng-template>
-                            <ng-template let-value="value" ngx-datatable-cell-template>
-                                {{value}}
-                            </ng-template>
-                        </ngx-datatable-column>
-                        <ngx-datatable-column  prop="SystemDiscipline" name="'Carga Horária'">
-                            <ng-template let-column="workload" ngx-datatable-header-template>
-                            </ng-template>
-                            <ng-template let-value="value" ngx-datatable-cell-template>
-                                {{value}}
+                        <ngx-datatable-column name="Name" [flexGrow]="1.5">
+                            <ng-template ngx-datatable-header-template>
+                                Nome
                             </ng-template>
                         </ngx-datatable-column>
 
-                        <ngx-datatable-column  prop="SystemDiscipline" name="'Descrição'">
-                            <ng-template let-column="description" ngx-datatable-header-template>
+                        <ngx-datatable-column name="workload" [flexGrow]="1.5">
+                            <ng-template ngx-datatable-header-template>
+                               <span fxLayoutAlign="center center">Carga Horária</span>
                             </ng-template>
-                            <ng-template let-value="value" ngx-datatable-cell-template>
-                                {{value}}
+                            <ng-template let-column="workload">
+                            </ng-template>
+                            <ng-template let-value="value" ngx-datatable-cell-template let-rowIndex="rowIndex">
+                                <span fxLayoutAlign="center center">{{value}}</span>
                             </ng-template>
                         </ngx-datatable-column>
+
+                        <ngx-datatable-column name="description" [flexGrow]="1.5">
+                            <ng-template ngx-datatable-header-template>
+                                <span fxLayoutAlign="center center">Descrição</span>
+                            </ng-template>
+                            <ng-template let-column="description">
+                            </ng-template>
+                            <ng-template let-value="value" ngx-datatable-cell-template let-rowIndex="rowIndex">
+                                <span fxLayoutAlign="center center">{{value}}</span>
+                            </ng-template>
+                        </ngx-datatable-column>
+
                     </ngx-datatable>
                 </div>
             </mat-card>
