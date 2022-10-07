@@ -35,7 +35,8 @@ $cefet_road_map-theme: mat.define-light-theme((
 
 /* You can add global styles to this file, and also import other style files */
 body{
-    background: linear-gradient(90deg, #3F2B96 0%, #A8C0FF 100%);
+    //background: linear-gradient(90deg, #3F2B96 0%, #A8C0FF 100%);
+    background: #E8E8E8;
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

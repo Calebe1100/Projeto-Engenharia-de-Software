@@ -16,17 +16,19 @@ export class DisciplinesRegisterComponent implements OnInit {
   discipline: boolean = false;
   //private disciplineDialog: MatDialogRef<DialogDisciplinesComponent, any>;
   listDiscipline: SystemDiscipline[] = [];
+  tablestyle = 'bootstrap';
 
   constructor(public dialog: MatDialog, private readonly systemDisciplinesService: SystemDisciplinesService) { }
 
   ngOnInit(): void {
-    this.systemDisciplinesService.listSystemDisciplines().subscribe(resp  => {
+    this.systemDisciplinesService.listSystemDisciplines().subscribe(resp => {
       this.formattedRows(resp.list);
       this.listDiscipline = resp.list as SystemDiscipline[];
+      console.log(this.listDiscipline)
     });
   }
   formattedRows(listDiscipline: SystemDiscipline[]) {
-    listDiscipline.map(discipline => {})
+    listDiscipline.map(discipline => { })
   }
 
   get displayDisciplinesList(): boolean {
