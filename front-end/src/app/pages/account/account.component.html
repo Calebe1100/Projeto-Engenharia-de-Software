@@ -20,7 +20,9 @@
       <label for="exampleInputPassword1">Senha</label>
       <input type="password" class="form-control" formControlName="password" placeholder="Senha">
     </div>
+    <div class="buttons-submit">
+      <button type="submit" class="btn btn-primary mr-2" [disabled]="!loginForm.valid">Entrar</button>
+      <a routerLink="/sign-up">Registre-se </a>  
+    </div>
   </form>
-  <button type="submit" class="btn btn-primary mb-2" [disabled]="!loginForm.valid">Entrar</button>
-  <button  class="btn btn-primary" routerLink="/sign-up">Registre-se </button>
 </div>

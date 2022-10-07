@@ -1,8 +1,61 @@
 import UserRepository from "../../models/user";
+import bcrypt from 'bcryptjs';
+import * as yup from 'yup';
 
 async function findAll(req, res) {
-  const users = await UserRepository.findAll();
-  res.json(users);
+
+  UserRepository.findAll().then(data => {
+    res.send(data);
+  })
+  .catch(err => {
+    res.status(500).send({
+      message:
+        err.message || "Some error occurred while retrieving tutorials."
+    });
+})
 }
 
-export default { findAll };
+async function store(req, res) {
+
+  let schema = yup.object({
+    name: yup.string().required(),
+    email: yup.string().email().required(),
+    password: yup.string().required()
+  });
+
+  if(!(await schema.isValid(req.body))){
+    return res.status(400).json({
+      error: true,
+      message: "Dados inválidos"
+    })
+  }
+
+  let userExist = await UserRepository.findOne({where: { email: req.body.email }});
+  if(userExist) {
+    return res.status(400).json({
+      error: true,
+      message: "Este usuário já existe!"
+    })
+  }
+
+  const { name, email, password, registration, birth_date } = req.body;
+
+  const data = { name, email, password, registration, birth_date };
+
+  data.password = await bcrypt.hash(data.password, 8);
+
+   await UserRepository.create(data).then(() => {
+    res.status(200).json({
+        error: false,
+        message: "Usuário cadastrado com sucesso!"
+    })
+    })
+    .catch(err => {
+        res.status(400).json({
+            error: err
+        })
+    })
+
+}
+
+export default { findAll, store };

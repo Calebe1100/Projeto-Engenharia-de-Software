@@ -1,9 +1,9 @@
 import { Sequelize, DataTypes } from "sequelize";
 import db from "./db";
 
-export default db.define("user", {
+export default db.define("course", {
   id: {
-    type: DataTypes.UUID,
+    type: DataTypes.INTEGER,
     defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
   },
@@ -11,28 +11,22 @@ export default db.define("user", {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  email: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    unique: true,
-  },
-  password: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    unique: true,
-  },
-  registration: {
-    type: DataTypes.STRING,
+  mandatory_workload: {
+    type: DataTypes.INTEGER,
     allowNull: false,
   },
-  birth_date: {
-    type: DataTypes.DATEONLY,
+  optional_workload: {
+    type: DataTypes.INTEGER,
     allowNull: false,
   },
-  period: {
+  complementary_workload: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  description: {
     type: DataTypes.STRING,
     allowNull: true,
-  },
+  }
 }, 
 {
   // don't add the timestamp attributes (updatedAt, createdAt)
