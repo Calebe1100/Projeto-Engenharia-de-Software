@@ -8,19 +8,20 @@ const routes = express.Router();
 
 /*-----------Usuário-------------*/
 routes.get("/users", users.findAll);
-routes.post("/users", users.store);
+routes.post("/users",users.store);
 
 /*-----------Login-------------*/
 routes.post("/login", login.login);
 
 /*-----------Course-------------*/
 routes.get("/courses", courses.findAll);
-routes.post("/courses", courses.store);
+routes.post("/courses", users.store);
 
 /*-----------Discipline-------------*/
 routes.get("/disciplines", disciplines.findAll);
 routes.post("/disciplines", disciplines.store);
-routes.put("/disciplines", disciplines.update)
-routes.delete("/disciplines", disciplines.drop)
+/*-----------System-Discipline-------------*/
+routes.get("/system-disciplines", disciplines.findAll);
+routes.post("/system-disciplines", disciplines.store);
 
 export { routes as default };

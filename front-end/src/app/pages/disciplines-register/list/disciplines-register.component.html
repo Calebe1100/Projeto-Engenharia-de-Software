@@ -11,17 +11,31 @@
     <div class="w-full min-w-50" fxLayoutAlign="center stretch">
         <div class="w-75 min-w-50" fxLayoutAlign="end stretch" fxLayout="column" fxLayoutGap="15px">
             <mat-card class="w-full min-w-50">
-                <div *ngIf="displayDisciplinesList;else noDisciplines" fxFill fxLayout="column">
-                    <ngx-datatable class="material scrolling">
+                <div *ngIf="listDiscipline; else noDisciplines" fxFill fxLayout="column">
+                    <ngx-datatable class="material scrolling" [rows]="listDiscipline" >
 
-                        <ngx-datatable-column *ngIf="" prop="discipline" name="'teste'">
-                            <ng-template let-column="nomeUltimoRevisorJuridico" ngx-datatable-header-template>
+                        <ngx-datatable-column  prop="SystemDiscipline" name="'Nome'">
+                            <ng-template let-column="name" ngx-datatable-header-template>
+                            </ng-template>
+                            <ng-template let-value="value" ngx-datatable-cell-template>
+                                {{value}}
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column  prop="SystemDiscipline" name="'Carga Horária'">
+                            <ng-template let-column="workload" ngx-datatable-header-template>
                             </ng-template>
                             <ng-template let-value="value" ngx-datatable-cell-template>
                                 {{value}}
                             </ng-template>
                         </ngx-datatable-column>
 
+                        <ngx-datatable-column  prop="SystemDiscipline" name="'Descrição'">
+                            <ng-template let-column="description" ngx-datatable-header-template>
+                            </ng-template>
+                            <ng-template let-value="value" ngx-datatable-cell-template>
+                                {{value}}
+                            </ng-template>
+                        </ngx-datatable-column>
                     </ngx-datatable>
                 </div>
             </mat-card>

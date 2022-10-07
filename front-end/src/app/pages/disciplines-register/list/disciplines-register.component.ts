@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { SystemDiscipline } from 'src/services/api/system-disciplines/interface/SystemDiscipline';
+import { SystemDisciplinesService } from 'src/services/api/system-disciplines/system-discipline.service';
 import { DialogDisciplinesComponent } from '../../dialog/dialog-disciplines/dialog-disciplines.component';
 
 @Component({
@@ -13,10 +15,18 @@ export class DisciplinesRegisterComponent implements OnInit {
   searchInputControl: FormControl = new FormControl();
   discipline: boolean = false;
   //private disciplineDialog: MatDialogRef<DialogDisciplinesComponent, any>;
+  listDiscipline: SystemDiscipline[] = [];
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, private readonly systemDisciplinesService: SystemDisciplinesService) { }
 
   ngOnInit(): void {
+    this.systemDisciplinesService.listSystemDisciplines().subscribe(resp  => {
+      this.formattedRows(resp.list);
+      this.listDiscipline = resp.list as SystemDiscipline[];
+    });
+  }
+  formattedRows(listDiscipline: SystemDiscipline[]) {
+    listDiscipline.map(discipline => {})
   }
 
   get displayDisciplinesList(): boolean {
