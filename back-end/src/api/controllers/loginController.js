@@ -1,12 +1,13 @@
 import UserRepository from "../../models/user";
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import dotenv from "dotenv/config.js";
 
 async function login(req, res) {
   
     const { email, password } = req.body;
 
-    const userExist = await UserRepository.findOne({ email });
+    const userExist = await UserRepository.findOne({where: { email: req.body.email }});
 
     if(!userExist){
       return res.status(400).json({
@@ -29,8 +30,8 @@ async function login(req, res) {
       },
       token: jwt.sign(
         {id: userExist._id}, 
-        config.secret, 
-        {expiresIn: config.expireIn} 
+        process.env.SECRET_JWT_KEY, 
+        {expiresIn: process.env.EXPIRE_IN_KEY} 
       )
     })
   }
