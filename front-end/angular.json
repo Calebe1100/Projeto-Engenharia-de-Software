@@ -103,9 +103,21 @@
             ],
             "scripts": []
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
   },
-  "defaultProject": "cefet_road_map"
+  "defaultProject": "cefet_road_map",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  }
 }
