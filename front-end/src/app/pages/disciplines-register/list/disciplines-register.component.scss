@@ -1,0 +1,21 @@
+::ng-deep .ngx-datatable.material .datatable-body .datatable-body-row .datatable-body-cell {
+    color: unset;
+  }
+  
+  ::ng-deep .ngx-datatable.fixed-header .datatable-header .datatable-header-inner .datatable-header-cell {
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: normal !important;
+  }
+  
+  .scrolling {
+    height: calc(100vh - 110px);
+  }
+  
+  .ngx-datatable.material.scroll-vertical {
+    height: 40vh;
+  }
+
+  .ngx-datatable.fixed-row .datatable-scroll .datatable-body-row .datatable-body-cell, .ngx-datatable.fixed-row .datatable-scroll .datatable-body-row .datatable-body-group-cell {
+    margin: 10px !important; 
+  }

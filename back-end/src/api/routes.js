@@ -9,20 +9,19 @@ const routes = express.Router();
 
 /*-----------Usuário-------------*/
 routes.get("/users", users.findAll);
-routes.post("/users", users.store);
+routes.post("/users",users.store);
 
 /*-----------Login-------------*/
 routes.post("/login", login.login);
 
 /*-----------Course-------------*/
 routes.get("/courses", courses.findAll);
-routes.post("/courses", courses.store);
+routes.post("/courses", users.store);
 
-/*-----------UserDisciplines-------------*/
+/*-----------Discipline-------------*/
 routes.get("/disciplines", userDisciplines.findAll);
 routes.post("/disciplines", userDisciplines.store);
-
-/*-----------SystemDisciplines-------------*/
+/*-----------System-Discipline-------------*/
 routes.get("/system-disciplines", systemDisciplines.findAll);
 routes.post("/system-disciplines", systemDisciplines.store);
 
