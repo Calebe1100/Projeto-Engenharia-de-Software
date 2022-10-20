@@ -120,5 +120,8 @@
       }
     }
   },
-  "defaultProject": "cefet_road_map"
+  "defaultProject": "cefet_road_map",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  }
 }
