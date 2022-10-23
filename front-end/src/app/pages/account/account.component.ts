@@ -34,7 +34,7 @@ export class AccountComponent implements OnInit {
         email: this.loginForm.value['email'],
         password: this.loginForm.value['password'],
       };
-      this.authSevice.Login(userLogin);
+      this.authSevice.login(userLogin);
     }
   }
 }

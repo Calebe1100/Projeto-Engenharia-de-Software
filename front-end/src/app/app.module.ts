@@ -8,6 +8,7 @@ import { AuthService } from 'src/services/api/login/auth.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PagesModule } from './pages/pages.module';
+import { BasicSnackbarModule } from './shared/components/snack-bar.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,6 +19,7 @@ import { PagesModule } from './pages/pages.module';
     AppRoutingModule,
     FlexLayoutModule,
     HttpClientModule,
+    BasicSnackbarModule,
   ],
   providers: [AuthService],
   exports: [PagesModule],
