@@ -13,7 +13,6 @@ import { LoginService } from 'src/services/api/login/login.service';
 export class AccountComponent implements OnInit {
   loginForm: FormGroup;
   openRegisterForm = false;
-  userLogin: UserLogin = { email: '', password: '' };
 
   constructor(
     private readonly authSevice: AuthService,
@@ -31,16 +30,11 @@ export class AccountComponent implements OnInit {
 
   async onSubmit() {
     if (this.loginForm.valid) {
-      this.userLogin = {
+      const userLogin = {
         email: this.loginForm.value['email'],
         password: this.loginForm.value['password'],
       };
-      this.loginService.login(this.userLogin).subscribe((resp) => {
-        if (resp.ok) {
-          this.router.navigate(['/disciplines-register']);
-        } else {
-        }
-      });
+      this.authSevice.Login(userLogin);
     }
   }
 }

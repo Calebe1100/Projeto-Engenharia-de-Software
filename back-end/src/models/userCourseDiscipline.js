@@ -1,8 +1,8 @@
-import { Sequelize, DataTypes } from "sequelize";
-import db from "./db";
-import Course from "./course";
-import Discipline from "./discipline";
-import User from "./user";
+import { DataTypes } from "sequelize";
+import Course from "./course.js";
+import db from "./db.js";
+import Discipline from "./discipline.js";
+import User from "./user.js";
 
  const UserCourseDiscipline = db.define("user_course_discipline", {
   init_date: {

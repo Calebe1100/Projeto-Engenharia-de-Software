@@ -1,5 +1,5 @@
-import { Sequelize, DataTypes } from "sequelize";
-import db from "./db";
+import { DataTypes } from "sequelize";
+import db from "./db.js";
 
 export default db.define("course", {
   id: {

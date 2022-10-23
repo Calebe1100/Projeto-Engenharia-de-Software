@@ -1,9 +1,9 @@
 import express from "express";
-import courses from "../api/controllers/coursesController";
-import login from "../api/controllers/loginController";
-import systemDisciplines from "../api/controllers/systemDisciplinesController";
-import userDisciplines from "../api/controllers/userDisciplinesController";
-import users from "../api/controllers/usersController";
+import courses from "../api/controllers/coursesController.js";
+import login from "../api/controllers/loginController.js";
+import systemDisciplines from "../api/controllers/systemDisciplinesController.js";
+import userDisciplines from "../api/controllers/userDisciplinesController.js";
+import users from "../api/controllers/usersController.js";
 
 const routes = express.Router();
 

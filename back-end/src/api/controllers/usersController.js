@@ -1,5 +1,5 @@
 import * as yup from 'yup';
-import UserRepository from "../../models/user";
+import UserRepository from "../../models/user.js";
 
 async function findAll(req, res) {
 
@@ -41,7 +41,7 @@ async function store(req, res) {
 
   const data = { name, email, password, registration, birth_date };
 
-  // data.password = await bcrypt.hash(data.password, 8);
+  data.password = await bcrypt.hash(data.password, 8);
 
   console.log(data);
 

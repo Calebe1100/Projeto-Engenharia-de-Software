@@ -1,10 +1,18 @@
 {
-    "type": "node",
-    "request": "launch",
-    "name": "Debug",
-    "program": "${workspaceFolder}/index.js",
-    "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/babel-node",
-    "runtimeArgs": [
-      "--nolazy"
-    ]
-  }
+  "name": "Launch",
+  "type": "node",
+  "request": "launch",
+  "program": "${workspaceRoot}/src/server.js",
+  "stopOnEntry": false,
+  "args": [],
+  "cwd": "${workspaceRoot}",
+  "preLaunchTask": "build",
+  "runtimeExecutable": null,
+  "runtimeArgs": [ "--nolazy" ],
+  "env": {
+      "NODE_ENV": "development"
+  },
+  "externalConsole": false,
+  "sourceMaps": true,
+  "outDir": "${workspaceRoot}/dist"
+}
