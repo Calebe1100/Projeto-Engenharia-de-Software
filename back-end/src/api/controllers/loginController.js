@@ -1,7 +1,5 @@
-import UserRepository from "../../models/user";
 import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
-import dotenv from "dotenv/config.js";
+import UserRepository from "../../models/user";
 
 async function login(req, res) {
   
@@ -22,18 +20,18 @@ async function login(req, res) {
         message: "A senha está inválida!"
       })
     }
-
     return res.status(200).json({
       user: {
         name: userExist.name,
         email: userExist.email
       },
-      token: jwt.sign(
-        {id: userExist._id}, 
-        process.env.SECRET_JWT_KEY, 
-        {expiresIn: process.env.EXPIRE_IN_KEY} 
-      )
+      // token: jwt.sign(
+      //   {id: userExist._id}, 
+      //   process.env.SECRET_JWT_KEY, 
+      //   {expiresIn: process.env.EXPIRE_IN_KEY} 
+      // )
     })
+    
   }
 
 export default { login };

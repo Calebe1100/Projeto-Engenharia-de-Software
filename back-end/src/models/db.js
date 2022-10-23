@@ -1,12 +1,14 @@
-import { Sequelize } from "sequelize";
 import dotenv from "dotenv/config.js";
+import { Sequelize } from "sequelize";
 
+console.log(dotenv);
 const dbName = process.env.DB_NAME; // passar os dados do .env para as constantes
 const dbUser = process.env.DB_USER;
 const dbHost = process.env.DB_HOST;
 const dbPassword = process.env.DB_PASSWORD;
 
 const sequelize = new Sequelize(dbName, dbUser, dbPassword, {
+    logging: false,
     host: dbHost,
     dialect: 'postgres'
 });

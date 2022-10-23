@@ -1,6 +1,5 @@
-import UserRepository from "../../models/user";
-import bcrypt from 'bcryptjs';
 import * as yup from 'yup';
+import UserRepository from "../../models/user";
 
 async function findAll(req, res) {
 
@@ -42,9 +41,11 @@ async function store(req, res) {
 
   const data = { name, email, password, registration, birth_date };
 
-  data.password = await bcrypt.hash(data.password, 8);
+  // data.password = await bcrypt.hash(data.password, 8);
 
-   await UserRepository.create(data).then(() => {
+  console.log(data);
+
+   await UserRepository.create(data).then((res) => {
     res.status(200).json({
         error: false,
         message: "Usuário cadastrado com sucesso!"
