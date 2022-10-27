@@ -9,10 +9,9 @@ import {
   templateUrl: "./snack-bar.component.html",
   styleUrls: ["./snack-bar.component.scss"]
 })
-export class BasicSnackbarComponent implements OnInit {
+export class BasicSnackbarComponent {
   constructor(
     public sbRef: MatSnackBarRef<BasicSnackbarComponent>,
     @Inject(MAT_SNACK_BAR_DATA) public data: any
   ) {}
-  ngOnInit() {}
 }

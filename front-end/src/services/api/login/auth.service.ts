@@ -19,12 +19,14 @@ export class AuthService {
 
   async login(user: UserLogin) {
     return this.loginService.login(user).subscribe((resp) => {
-      if (resp.ok) {
-        this.userAuthetication = true;
-        this.router.navigate(['/disciplines-register']);
-      } else {
-        this.userAuthetication = false;
+      try {
+        if (resp.ok) {
+          this.router.navigate(['/disciplines-register']);
+        }
+      } catch {
+        return false;
       }
+      return false;
     });
   }
 
