@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/services/api/login/auth.service';
@@ -12,7 +12,7 @@ import { LoginService } from 'src/services/api/login/login.service';
   styleUrls: ['./account.component.scss'],
 })
 export class AccountComponent {
-  loginForm: FormGroup;
+  loginForm: UntypedFormGroup;
   openRegisterForm = false;
 
   constructor(
@@ -21,9 +21,9 @@ export class AccountComponent {
     private readonly router: Router,
     private snackBar: MatSnackBar
   ) {
-    this.loginForm = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required]),
+    this.loginForm = new UntypedFormGroup({
+      email: new UntypedFormControl('', [Validators.required, Validators.email]),
+      password: new UntypedFormControl('', [Validators.required]),
     });
   }
   async onSubmit() {

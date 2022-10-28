@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { PERIODS } from 'src/app/shared/enum/PERIODS';
 import { AuthService } from 'src/services/api/login/auth.service';
@@ -12,7 +12,7 @@ import { RegisterUserService } from 'src/services/api/login/register-user.servic
   styleUrls: ['./sign-up.component.scss'],
 })
 export class SignUpComponent {
-  loginForm: FormGroup;
+  loginForm: UntypedFormGroup;
   openRegisterForm = false;
   periods = PERIODS;
 
@@ -20,14 +20,14 @@ export class SignUpComponent {
     private readonly authService: AuthService,
     private snackBar: MatSnackBar
   ) {
-    this.loginForm = new FormGroup({
-      name: new FormControl('', [Validators.required]),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      birthDate: new FormControl('', [Validators.required]),
-      registrationNumber: new FormControl('', [Validators.required]),
-      password: new FormControl('', [Validators.required]),
-      passwordConfirm: new FormControl('', [Validators.required]),
-      period: new FormControl(''),
+    this.loginForm = new UntypedFormGroup({
+      name: new UntypedFormControl('', [Validators.required]),
+      email: new UntypedFormControl('', [Validators.required, Validators.email]),
+      birthDate: new UntypedFormControl('', [Validators.required]),
+      registrationNumber: new UntypedFormControl('', [Validators.required]),
+      password: new UntypedFormControl('', [Validators.required]),
+      passwordConfirm: new UntypedFormControl('', [Validators.required]),
+      period: new UntypedFormControl(''),
     });
   }
 

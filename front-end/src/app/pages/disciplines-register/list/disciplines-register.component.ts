@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { SystemDiscipline } from 'src/services/api/system-disciplines/interface/SystemDiscipline';
 import { SystemDisciplinesService } from 'src/services/api/system-disciplines/system-discipline.service';
@@ -12,7 +12,7 @@ import { DialogDisciplinesComponent } from '../../dialog/dialog-disciplines/dial
 })
 export class DisciplinesRegisterComponent implements OnInit {
 
-  searchInputControl: FormControl = new FormControl();
+  searchInputControl: UntypedFormControl = new UntypedFormControl();
   discipline: boolean = false;
   //private disciplineDialog: MatDialogRef<DialogDisciplinesComponent, any>;
   listDiscipline: SystemDiscipline[] = [];
