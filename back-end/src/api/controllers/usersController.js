@@ -19,8 +19,11 @@ async function store(req, res) {
   let schema = yup.object({
     name: yup.string().required(),
     email: yup.string().email().required(),
-    password: yup.string().required()
-  });
+    password: yup.string().required(),
+    registrationNumber: yup.string().required(),
+    birthDate: yup.string().required(),
+    period: yup.string(), 
+    });
 
   if(!(await schema.isValid(req.body))){
     return res.status(400).json({
@@ -37,22 +40,18 @@ async function store(req, res) {
     })
   }
 
-  const { name, email, password, registration, birth_date } = req.body;
+  const data = { name: req.body.name, email: req.body.email, password: req.body.password, registration: req.body.registrationNumber, birth_date: req.body.birthDate };
 
-  const data = { name, email, password, registration, birth_date };
+  // data.password = await bcrypt.hash(data.password, 8); //TODO Esta dando erro na criptação
 
-  data.password = await bcrypt.hash(data.password, 8);
-
-  console.log(data);
-
-   await UserRepository.create(data).then((res) => {
+   await UserRepository.create(data).then(() => {
     res.status(200).json({
         error: false,
         message: "Usuário cadastrado com sucesso!"
     })
     })
     .catch(err => {
-        res.status(400).json({
+      res.status(400).json({
             error: err
         })
     })

@@ -1,5 +1,11 @@
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpParams,
+  HttpResponse,
+} from '@angular/common/http';
 import { map, Observable } from 'rxjs';
-import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
+import { ErrorApiTemplate } from './ErrorApiTemplate';
 
 type Params = HttpParams;
 
@@ -57,5 +63,15 @@ export class ApiServiceTemplate {
     return this.httpClient.put(endpointUrl, body, {
       observe: 'response',
     });
+  }
+
+  public static getErrorMessageFromResponse(
+    errorReturn: HttpErrorResponse
+  ): string {
+    const errorApi = errorReturn.error as ErrorApiTemplate;
+    if (errorApi.error) {
+      return errorApi.message;
+    }
+    return 'unknown_error';
   }
 }

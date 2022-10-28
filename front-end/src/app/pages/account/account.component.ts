@@ -32,11 +32,9 @@ export class AccountComponent {
         email: this.loginForm.value['email'],
         password: this.loginForm.value['password'],
       };
-      if (!(await this.authSevice.login(userLogin))) {
-        this.snackBar.open('Erro ao cadastrar', 'Done', { duration: 5000 });
-      }
-    } else {
-      this.snackBar.open('Dados Inválidos', 'Done');
+      await this.authSevice
+        .login(userLogin)
+        .catch((error) => this.snackBar.open(error, 'Done'));
     }
   }
 }

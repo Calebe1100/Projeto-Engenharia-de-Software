@@ -23,7 +23,7 @@ export class SignUpComponent {
     this.loginForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email]),
-      birthData: new FormControl('', [Validators.required]),
+      birthDate: new FormControl('', [Validators.required]),
       registrationNumber: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required]),
       passwordConfirm: new FormControl('', [Validators.required]),
@@ -35,7 +35,9 @@ export class SignUpComponent {
     const modelUserToRequest = {
       name: this.loginForm.value['name'],
       email: this.loginForm.value['email'],
-      numberRegistration: this.loginForm.value['registration'],
+      registrationNumber: this.convertPeriodToNumber(
+        this.loginForm.value['registrationNumber']
+      ),
       birthDate: this.loginForm.value['birthDate'],
       password: this.loginForm.value['password'],
       period: this.loginForm.value['period'],
@@ -46,7 +48,10 @@ export class SignUpComponent {
         this.snackBar.open('Erro ao cadastrar', 'Done', { duration: 5000 });
       }
     } else {
-      this.snackBar.open('Dados Inválidos', 'Done');
+      this.snackBar.open('Dados Inválidos', 'Done', { duration: 5000 });
     }
+  }
+  convertPeriodToNumber(period: string): string {
+    return period.slice(0, 1);
   }
 }
