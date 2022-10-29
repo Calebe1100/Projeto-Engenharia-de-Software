@@ -4,9 +4,15 @@
         fxLayoutAlign="space-between center" style="background-color: #93B4DA;">
         <a [routerLink]="['../account']" style="font-family: roboto;">Cefet RoadMap</a>
 
-        <button mat-icon-button color="primary">
-            <mat-icon class="icon-size-5">settings</mat-icon>
-        </button>
+        <button mat-icon-button [matMenuTriggerFor]="menu" color="primary" fxLayoutAlign="end end" style="border: none">
+            <mat-icon>menu</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-icon-button color="primary"  class="button-configuration">
+              Consigurações
+              <mat-icon >settings</mat-icon>
+          </button>              
+          </mat-menu>
     </mat-toolbar>
 
     <!-- Content -->

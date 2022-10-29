@@ -8,27 +8,30 @@ import { DialogDisciplinesComponent } from '../../dialog/dialog-disciplines/dial
 @Component({
   selector: 'app-disciplines-register',
   templateUrl: './disciplines-register.component.html',
-  styleUrls: ['./disciplines-register.component.scss']
+  styleUrls: ['./disciplines-register.component.scss'],
 })
 export class DisciplinesRegisterComponent implements OnInit {
-
   searchInputControl: UntypedFormControl = new UntypedFormControl();
   discipline: boolean = false;
   //private disciplineDialog: MatDialogRef<DialogDisciplinesComponent, any>;
   listDiscipline: SystemDiscipline[] = [];
+  filterListDiscipline: SystemDiscipline[] = [];
   tablestyle = 'bootstrap';
 
-  constructor(public dialog: MatDialog, private readonly systemDisciplinesService: SystemDisciplinesService) { }
+  constructor(
+    public dialog: MatDialog,
+    private readonly systemDisciplinesService: SystemDisciplinesService
+  ) {}
 
   ngOnInit(): void {
-    this.systemDisciplinesService.listSystemDisciplines().subscribe(resp => {
+    this.systemDisciplinesService.listSystemDisciplines().subscribe((resp) => {
       this.formattedRows(resp.list);
       this.listDiscipline = resp.list as SystemDiscipline[];
-      console.log(this.listDiscipline)
+      this.filterListDiscipline = this.listDiscipline;
     });
   }
   formattedRows(listDiscipline: SystemDiscipline[]) {
-    listDiscipline.map(discipline => { })
+    listDiscipline.map((discipline) => {});
   }
 
   get displayDisciplinesList(): boolean {
@@ -43,35 +46,27 @@ export class DisciplinesRegisterComponent implements OnInit {
     this.dialog.open(DialogDisciplinesComponent);
   }
 
-  searchInput(value: string): void {
-    if (value.length !== 0) {
-      /* const or = [];
-      const fields = ['name'];
-      fields.forEach((filter) =>
-          or.push({
-              [filter]: { $regex: value, $options: 'i' },
-          })
-      );
+  async updateResults() {
+    this.listDiscipline = this.searchByValue();
+  }
 
-      const aggregate = this._setQuery.setQueryFilter(
-          { deletedAt: null, $or: or },
-          ['name'],
-          ['name']
-      );
-      this._areasService.getAreasByAggregate(aggregate).subscribe(
-          (response: GetAreasResponse) => {
-              this.areas = response.data;
-          },
-          (response: HttpErrorResponse) => {
-              this._alertService.add({
-                  message: 'Área inexistente',
-                  type: 'warning',
-                  title: 'Atenção',
-              });
-          }
-      ); */
-    } else {
-      //this._areasService.getAreasByPagination().subscribe();
-    }
+  searchByValue() {
+    return this.filterListDiscipline.filter((item) => {
+      if (this.searchInputControl.value.trim() === '') {
+        this.filterListDiscipline = this.listDiscipline;
+        return true;
+      } else {
+        return (
+          item.name
+            .toLowerCase()
+            .includes(
+              this.searchInputControl.value.trim().toLocaleLowerCase()
+            ) ||
+          item.name
+            .toLowerCase()
+            .includes(this.searchInputControl.value.trim().toLocaleLowerCase())
+        );
+      }
+    });
   }
 }
