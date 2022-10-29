@@ -9,8 +9,4 @@ export class HomeComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
-
-  get currentYear(): number {
-    return new Date().getFullYear();
-  }
 }

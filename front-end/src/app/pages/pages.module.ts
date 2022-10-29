@@ -18,6 +18,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { DialogDisciplinesComponent } from './dialog/dialog-disciplines/dialog-disciplines.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { MatMenuModule } from '@angular/material/menu';
     SignUpComponent,
     DisciplinesRegisterComponent,
     DialogDisciplinesComponent,
+    SettingsComponent,
   ],
   imports: [
     CommonModule,
@@ -41,8 +43,6 @@ import { MatMenuModule } from '@angular/material/menu';
     MatInputModule,
     MatCardModule,
     MatDialogModule,
-    MatInputModule,
-    MatMenuModule,
     NgxDatatableModule,
   ],
   exports: [],
