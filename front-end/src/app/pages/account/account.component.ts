@@ -1,24 +1,40 @@
-import { Component } from "@angular/core";
-import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { Component, OnInit } from '@angular/core';
+import { UntypedFormGroup, UntypedFormControl, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/services/api/login/auth.service';
+import { UserLogin } from 'src/services/api/login/interface/UserLogin';
+import { LoginService } from 'src/services/api/login/login.service';
 
 @Component({
-  selector: "app-account",
-  templateUrl: "./account.component.html",
-  styleUrls: ["./account.component.scss"],
+  selector: 'app-account',
+  templateUrl: './account.component.html',
+  styleUrls: ['./account.component.scss'],
 })
 export class AccountComponent {
-  loginForm: FormGroup;
+  loginForm: UntypedFormGroup;
   openRegisterForm = false;
-  constructor() {
-    this.loginForm = new FormGroup({
-      email: new FormControl("", [Validators.required, Validators.email]),
-      password: new FormControl("", [Validators.required]),
+
+  constructor(
+    private readonly authSevice: AuthService,
+    private readonly loginService: LoginService,
+    private readonly router: Router,
+    private snackBar: MatSnackBar
+  ) {
+    this.loginForm = new UntypedFormGroup({
+      email: new UntypedFormControl('', [Validators.required, Validators.email]),
+      password: new UntypedFormControl('', [Validators.required]),
     });
   }
-
-  onSubmit() {
+  async onSubmit() {
     if (this.loginForm.valid) {
-      console.log(this.loginForm);
+      const userLogin = {
+        email: this.loginForm.value['email'],
+        password: this.loginForm.value['password'],
+      };
+      await this.authSevice
+        .login(userLogin)
+        .catch((error) => this.snackBar.open(error, 'Done'));
     }
   }
 }

@@ -1,19 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ApiServiceTemplate } from '../api.service.template';
-import { UserLogin } from './interface/UserLogin';
-import { UserResponse } from './interface/UserResponse';
+import { UserRequest } from './interface/UserRequest';
 
 @Injectable({
   providedIn: 'root',
 })
-export class LoginService extends ApiServiceTemplate {
+export class RegisterUserService extends ApiServiceTemplate {
   constructor(httpClient: HttpClient) {
     super(httpClient);
   }
 
-  login(params: UserLogin) {
-    const endPoint = `${ApiServiceTemplate.prefixApiLocal}/login`;
+  storeUser(params: UserRequest) {
+    const endPoint = `${ApiServiceTemplate.prefixApiLocal}/users`;
     return this.post(endPoint, params);
   }
 }

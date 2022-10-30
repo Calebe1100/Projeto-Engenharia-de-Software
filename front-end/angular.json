@@ -1,8 +1,9 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "cli": {
-    "analytics": false,
-    "defaultCollection": "@angular-eslint/schematics"
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   },
   "version": 1,
   "newProjectRoot": "projects",
@@ -119,9 +120,5 @@
         }
       }
     }
-  },
-  "defaultProject": "cefet_road_map",
-  "cli": {
-    "defaultCollection": "@angular-eslint/schematics"
   }
 }

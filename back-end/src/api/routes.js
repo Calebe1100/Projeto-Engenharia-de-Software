@@ -1,30 +1,29 @@
 import express from "express";
-import users from "../api/controllers/usersController";
-import login from "../api/controllers/loginController";
-import courses from "../api/controllers/coursesController";
-import systemDisciplines from "../api/controllers/systemDisciplinesController";
-import userDisciplines from "../api/controllers/userDisciplinesController";
-import sharedController from './controllers/sharedController';
+import courses from "../api/controllers/coursesController.js";
+import login from "../api/controllers/loginController.js";
+import systemDisciplines from "../api/controllers/systemDisciplinesController.js";
+import userDisciplines from "../api/controllers/userDisciplinesController.js";
+import users from "../api/controllers/usersController.js";
 
 const routes = express.Router();
 
 /*-----------Usuário-------------*/
-routes.get("/users", sharedController.verifyJWT, users.findAll);
+routes.get("/users",  users.findAll);
 routes.post("/users", users.store);
 
 /*-----------Login-------------*/
 routes.post("/login",  login.login);
 
 /*-----------Course-------------*/
-routes.get("/courses", sharedController.verifyJWT, courses.findAll);
-routes.post("/courses", sharedController.verifyJWT, courses.store);
+routes.get("/courses",  courses.findAll);
+routes.post("/courses",  courses.store);
 
 /*-----------UserDisciplines-------------*/
-routes.get("/disciplines", sharedController.verifyJWT, userDisciplines.findAll);
-routes.post("/disciplines", sharedController.verifyJWT, userDisciplines.store);
+routes.get("/disciplines", userDisciplines.findAll);
+routes.post("/disciplines",  userDisciplines.store);
 
 /*-----------SystemDisciplines-------------*/
-routes.get("/system-disciplines", sharedController.verifyJWT, systemDisciplines.findAll);
-routes.post("/system-disciplines", sharedController.verifyJWT, systemDisciplines.store);
+routes.get("/system-disciplines",  systemDisciplines.findAll);
+routes.post("/system-disciplines", systemDisciplines.store);
 
 export { routes as default };

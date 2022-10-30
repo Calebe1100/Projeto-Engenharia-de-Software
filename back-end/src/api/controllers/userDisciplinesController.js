@@ -1,7 +1,7 @@
-import DisciplinesRepository from "../../models/discipline";
-import UserDisciplinesRepository from "../../models/userCourseDiscipline";
-import UsersRepository from "../../models/user";
-import CourseRepository from "../../models/course";
+import CourseRepository from "../../models/course.js";
+import DisciplinesRepository from "../../models/discipline.js";
+import UsersRepository from "../../models/user.js";
+import UserDisciplinesRepository from "../../models/userCourseDiscipline.js";
 
 import yup from 'yup';
 

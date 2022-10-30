@@ -2,11 +2,12 @@
   "name": "back-end",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon src/app.js",
-    "dev": "nodemon --exec babel-node src/app.js"
+    "dev": "nodemon --exec babel-node src/app.js",
+    "build": "babel src -d dist --source-maps"
   },
   "author": "",
   "license": "ISC",
@@ -30,5 +31,6 @@
     "@babel/preset-env": "^7.19.1",
     "@types/cors": "^2.8.12",
     "nodemon": "^2.0.20"
-  }
+  },
+  "type":"module"
 }

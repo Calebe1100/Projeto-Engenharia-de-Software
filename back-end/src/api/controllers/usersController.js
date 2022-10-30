@@ -1,6 +1,5 @@
-import UserRepository from "../../models/user";
-import bcrypt from 'bcryptjs';
 import * as yup from 'yup';
+import UserRepository from "../../models/user.js";
 
 async function findAll(req, res) {
 
@@ -20,8 +19,11 @@ async function store(req, res) {
   let schema = yup.object({
     name: yup.string().required(),
     email: yup.string().email().required(),
-    password: yup.string().required()
-  });
+    password: yup.string().required(),
+    registrationNumber: yup.string().required(),
+    birthDate: yup.string().required(),
+    period: yup.string(), 
+    });
 
   if(!(await schema.isValid(req.body))){
     return res.status(400).json({
@@ -38,11 +40,9 @@ async function store(req, res) {
     })
   }
 
-  const { name, email, password, registration, birth_date } = req.body;
+  const data = { name: req.body.name, email: req.body.email, password: req.body.password, registration: req.body.registrationNumber, birth_date: req.body.birthDate };
 
-  const data = { name, email, password, registration, birth_date };
-
-  data.password = await bcrypt.hash(data.password, 8);
+  // data.password = await bcrypt.hash(data.password, 8); //TODO Esta dando erro na criptação
 
    await UserRepository.create(data).then(() => {
     res.status(200).json({
@@ -51,7 +51,7 @@ async function store(req, res) {
     })
     })
     .catch(err => {
-        res.status(400).json({
+      res.status(400).json({
             error: err
         })
     })

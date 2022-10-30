@@ -1,8 +1,8 @@
 <div class="m-3 w-full h-full" fxLayout="column" fxLayoutGap="15px">
     <mat-form-field class="w-full min-w-50" fxLayoutAlign="center center">
         <input matInput (keyup.enter)="
-                        searchInput('$event.target.value')
-                    " [formControl]="searchInputControl" [autocomplete]="'off'" placeholder="Pesquisar disciplina" />
+        updateResults()
+        "[formControl]="searchInputControl" [autocomplete]="'off'" placeholder="Pesquisar disciplina" />
         <button matSuffix mat-icon-button class="icon-size-5">
             <mat-icon>search</mat-icon>
         </button>

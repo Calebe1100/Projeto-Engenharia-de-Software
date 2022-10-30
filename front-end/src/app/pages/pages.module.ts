@@ -16,8 +16,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatCardModule } from '@angular/material/card';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { DialogDisciplinesComponent } from './dialog/dialog-disciplines/dialog-disciplines.component';
-import {MatDialogModule} from '@angular/material/dialog';
-
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatMenuModule } from '@angular/material/menu';
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     AccountComponent,
     SignUpComponent,
     DisciplinesRegisterComponent,
-    DialogDisciplinesComponent
+    DialogDisciplinesComponent,
+    SettingsComponent,
   ],
   imports: [
     CommonModule,
@@ -41,8 +43,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatInputModule,
     MatCardModule,
     MatDialogModule,
-    NgxDatatableModule
+    NgxDatatableModule,
   ],
   exports: [],
 })
-export class PagesModule { }
+export class PagesModule {}

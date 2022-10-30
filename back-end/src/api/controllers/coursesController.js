@@ -1,5 +1,5 @@
-import CoursesRepository from "../../models/course";
 import yup from 'yup';
+import CoursesRepository from "../../models/course.js";
 
 async function findAll(req, res) {
   
