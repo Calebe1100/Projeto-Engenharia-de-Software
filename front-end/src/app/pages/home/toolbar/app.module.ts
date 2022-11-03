@@ -13,17 +13,14 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { AppRoutingModule } from 'src/app/app-routing.module';
+import { AppComponent } from 'src/app/app.component';
+import { BasicSnackbarModule } from 'src/app/shared/components/snack-bar.module';
 import { AuthService } from 'src/services/api/login/auth.service';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { FooterComponent } from './pages/home/footer/footer.component';
-import { ToolbarComponent } from './pages/home/toolbar/toolbar.component';
-import { PagesModule } from './pages/pages.module';
-import { BasicSnackbarModule } from './shared/components/snack-bar.module';
+import { PagesModule } from '../../pages.module';
 
 @NgModule({
-  declarations: [AppComponent, FooterComponent, ToolbarComponent],
+  declarations: [AppComponent],
   imports: [
     PagesModule,
     BrowserModule,
@@ -35,7 +32,6 @@ import { BasicSnackbarModule } from './shared/components/snack-bar.module';
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
-    MatMenuModule,
     NgxDatatableModule,
   ],
   providers: [AuthService],

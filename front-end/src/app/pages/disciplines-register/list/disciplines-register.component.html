@@ -13,7 +13,7 @@
             <mat-card class="w-full min-w-50 h-full">
                 <div *ngIf="listDiscipline; else noDisciplines" fxFill fxLayout="column">
                     <ngx-datatable class="material scrolling" [ngClass]="tablestyle" [rows]="listDiscipline"
-                        [columnMode]="'force'" [scrollbarH]="true" [scrollbarV]="true" [reorderable]="false">
+                        [columnMode]="'force'" [scrollbarH]="true" [scrollbarV]="true" [reorderable]="false" (select)='onSelect($event)' [selectionType]="SelectionType.single">
 
                         <ngx-datatable-column name="Name" [flexGrow]="1.5">
                             <ng-template ngx-datatable-header-template>

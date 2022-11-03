@@ -24,6 +24,7 @@ export class AuthService {
   async login(user: UserLogin) {
     return this.loginService.login(user).subscribe(
       (resp) => {
+        window.localStorage.setItem('tokenJwt', resp.body as string)
         this.router.navigate(['/disciplines-register']);
       },
       (error: HttpErrorResponse) => {

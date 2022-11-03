@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormControl } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { SelectionType } from '@swimlane/ngx-datatable';
 import { SystemDiscipline } from 'src/services/api/system-disciplines/interface/SystemDiscipline';
 import { SystemDisciplinesService } from 'src/services/api/system-disciplines/system-discipline.service';
 import { DialogDisciplinesComponent } from '../../dialog/dialog-disciplines/dialog-disciplines.component';
@@ -18,22 +19,23 @@ export class DisciplinesRegisterComponent implements OnInit {
   filterListDiscipline: SystemDiscipline[] = [];
   tablestyle = 'bootstrap';
 
+  SelectionType = SelectionType;
+
   constructor(
     public dialog: MatDialog,
     private readonly systemDisciplinesService: SystemDisciplinesService
-  ) {}
+  ) {
+    this.selected.push(this.filterListDiscipline[2]);
+  }
+
+  selected: SystemDiscipline[] = [];
 
   ngOnInit(): void {
     this.systemDisciplinesService.listSystemDisciplines().subscribe((resp) => {
-      this.formattedRows(resp.list);
       this.listDiscipline = resp.list as SystemDiscipline[];
       this.filterListDiscipline = this.listDiscipline;
     });
   }
-  formattedRows(listDiscipline: SystemDiscipline[]) {
-    listDiscipline.map((discipline) => {});
-  }
-
   get displayDisciplinesList(): boolean {
     return true;
   }
@@ -68,5 +70,9 @@ export class DisciplinesRegisterComponent implements OnInit {
         );
       }
     });
+  }
+
+  onSelect(event: Event) {
+    console.log('Select Event', { event }, this.selected);
   }
 }

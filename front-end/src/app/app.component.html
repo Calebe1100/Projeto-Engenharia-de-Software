@@ -1,28 +1,4 @@
-    <!-- Header -->
-    <mat-toolbar class="mat-elevation-z4" fxLayout="row" fxLayoutAlign="start center"
-        fxLayoutAlign="space-between center" style="background-color: #93B4DA;">
-        <a [routerLink]="['../disciplines-register']" style="font-family: roboto;">Cefet RoadMap</a>
-
-        <button mat-icon-button [matMenuTriggerFor]="menu" color="primary" fxLayoutAlign="end end" style="border: none">
-            <mat-icon>menu</mat-icon>
-          </button>
-          <mat-menu #menu="matMenu">
-            <button mat-icon-button color="primary"  class="button-configuration" [routerLink]="['../settings']">
-              Consigurações
-              <mat-icon >settings</mat-icon>
-          </button>     
-          <button mat-icon-button color="primary"  class="button-configuration" [routerLink]="['../account']">
-            Sair
-            <mat-icon >logout</mat-icon>
-        </button>                     
-          </mat-menu>
-    </mat-toolbar>
+<app-toolbar *ngIf="toolbarService.visible"></app-toolbar>
 <router-outlet></router-outlet>
+<app-footer *ngIf="toolbarService.visible"></app-footer>
 
-    <!-- Footer -->
-    <footer class="bg-light text-center text-lg-start fixed-bottom">
-        <div class="text-center p-3" style="background-color: #93B4DA;">
-            &copy; {{currentYear}} Copyright:
-            <span class="text-dark" style="font-family: roboto">Cefet RoadMap</span>
-        </div>
-    </footer>
