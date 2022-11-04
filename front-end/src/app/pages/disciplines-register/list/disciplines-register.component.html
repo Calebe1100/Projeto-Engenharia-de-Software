@@ -56,6 +56,19 @@
                             </ng-template>
                         </ngx-datatable-column>
 
+                        <ngx-datatable-column name="status" [flexGrow]="1.5">
+                            <ng-template ngx-datatable-header-template>
+                               <span fxLayoutAlign="center center">Status</span>
+                            </ng-template>
+                            <ng-template let-column="status">
+                            </ng-template>
+                            <ng-template let-value="value" ngx-datatable-cell-template let-rowIndex="rowIndex">
+                                <span fxLayoutAlign="center center">{{value}}</span>
+                            </ng-template>
+                        </ngx-datatable-column>
+
+
+
                     </ngx-datatable>
                 </div>
             </mat-card>
