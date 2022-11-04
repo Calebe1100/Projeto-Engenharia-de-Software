@@ -1,0 +1,22 @@
+::ng-deep.mat-menu-panel {
+    max-width: auto !important;
+    min-width: none;
+    width: auto;
+  }
+  .button-configuration {
+    width: 100%;
+    padding: 5px;
+    place-content: none;
+    &:hover {
+      background-color: rgba(147, 180, 218, 0.247);
+      width: 100%;
+      border-radius: 0;
+    }
+    mat-icon {
+      margin-left: 10px;
+    }
+  }
+  button:focus {
+    outline: none;
+  }
+  

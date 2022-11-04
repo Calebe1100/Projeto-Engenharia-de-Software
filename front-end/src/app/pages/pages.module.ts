@@ -44,6 +44,7 @@ import { SettingsComponent } from './settings/settings.component';
     MatCardModule,
     MatDialogModule,
     NgxDatatableModule,
+    MatMenuModule,
   ],
   exports: [],
 })

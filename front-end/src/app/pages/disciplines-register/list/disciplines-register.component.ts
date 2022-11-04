@@ -1,7 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormControl } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { SelectionType } from '@swimlane/ngx-datatable';
+import { ColumnMode, SelectionType } from '@swimlane/ngx-datatable';
+import { DisciplineService } from 'src/services/api/disciplines/discipline.service';
+import {
+  Discipline,
+  DisciplineStatus,
+} from 'src/services/api/disciplines/interface/Discipline';
+import { AuthService } from 'src/services/api/login/auth.service';
 import { SystemDiscipline } from 'src/services/api/system-disciplines/interface/SystemDiscipline';
 import { SystemDisciplinesService } from 'src/services/api/system-disciplines/system-discipline.service';
 import { DialogDisciplinesComponent } from '../../dialog/dialog-disciplines/dialog-disciplines.component';
@@ -17,15 +23,29 @@ export class DisciplinesRegisterComponent implements OnInit {
   //private disciplineDialog: MatDialogRef<DialogDisciplinesComponent, any>;
   listDiscipline: SystemDiscipline[] = [];
   filterListDiscipline: SystemDiscipline[] = [];
+
+  listDisciplineSelected: SystemDiscipline[] = [];
+
   tablestyle = 'bootstrap';
 
+  ColumnMode = ColumnMode;
   SelectionType = SelectionType;
+
+  dateTime = '';
 
   constructor(
     public dialog: MatDialog,
-    private readonly systemDisciplinesService: SystemDisciplinesService
+    private readonly systemDisciplinesService: SystemDisciplinesService,
+    private readonly disciplineService: DisciplineService,
+    public readonly authService: AuthService
   ) {
     this.selected.push(this.filterListDiscipline[2]);
+
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    const day = date.getDay();
+    this.dateTime = `${day}/${month}/${year}`;
   }
 
   selected: SystemDiscipline[] = [];
@@ -72,7 +92,50 @@ export class DisciplinesRegisterComponent implements OnInit {
     });
   }
 
-  onSelect(event: Event) {
-    console.log('Select Event', { event }, this.selected);
+  onSelect(disciplineSelected: SystemDiscipline) {
+    const disciplineIdSelected = '';
+    if (
+      this.listDisciplineSelected.some(
+        (discipline) => discipline.id == disciplineSelected.id
+      )
+    ) {
+      this.listDisciplineSelected = this.listDisciplineSelected.filter(
+        (discipline) => discipline.id !== disciplineSelected.id
+      );
+    } else {
+      this.listDisciplineSelected.push(disciplineSelected);
+    }
+  }
+
+  isRowSelected(id: string) {
+    return false;
+  }
+
+  emitCompleted() {
+    this.disciplineService
+      .postUserDisciplines(
+        this.formattedListToRequest(DisciplineStatus.completed)
+      )
+      .subscribe(() => window.location.reload);
+  }
+
+  emitStudying() {
+    this.disciplineService
+      .postUserDisciplines(
+        this.formattedListToRequest(DisciplineStatus.studying)
+      )
+      .subscribe(() => window.location.reload);
+  }
+
+  formattedListToRequest(status: DisciplineStatus): Discipline[] {
+    return this.listDisciplineSelected.map((discipline) => {
+      return {
+        idCourse: 1,
+        finishDate: this.dateTime,
+        userId: 1,
+        idDiscipline: discipline.id,
+        status: status,
+      } as Discipline;
+    });
   }
 }

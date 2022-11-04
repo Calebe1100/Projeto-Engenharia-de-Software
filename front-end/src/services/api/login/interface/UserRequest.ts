@@ -4,5 +4,6 @@ export interface UserRequest {
   password: string;
   registrationNumber: string;
   birthDate: string;
+  course?: string;
   period?: string;
 }
