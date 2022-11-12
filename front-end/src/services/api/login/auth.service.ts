@@ -4,8 +4,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/internal/Observable';
 import { of } from 'rxjs/internal/observable/of';
+import { CookieService } from 'src/services/shared/cookieService';
 import { ApiServiceTemplate } from '../api.service.template';
 import { UserLogin } from './interface/UserLogin';
+import { UserLoginResponse } from './interface/UserLoginResponse';
 import { UserRequest } from './interface/UserRequest';
 import { LoginService } from './login.service';
 import { RegisterUserService } from './register-user.service';
@@ -20,13 +22,15 @@ export class AuthService {
     private readonly router: Router,
     private readonly loginService: LoginService,
     private readonly registerUserService: RegisterUserService,
-    private readonly snackbarService: MatSnackBar
+    private readonly snackbarService: MatSnackBar,
+    private readonly cookieService: CookieService
   ) {}
 
   async login(user: UserLogin) {
     return this.loginService.login(user).subscribe(
       (resp) => {
-        window.localStorage.setItem('tokenJwt', resp.body as string);
+        this.setUserCredentials(resp.body as UserLoginResponse);
+
         this.userAuthentication = of(true);
         this.router.navigate(['/disciplines-register']);
       },
@@ -38,6 +42,11 @@ export class AuthService {
         );
       }
     );
+  }
+  setUserCredentials(userModel: UserLoginResponse) {
+    window.localStorage.setItem('tokenJwt', userModel.token as string);
+
+    this.cookieService.setCookie('id', userModel.id, 40000);
   }
 
   async register(user: UserRequest) {
