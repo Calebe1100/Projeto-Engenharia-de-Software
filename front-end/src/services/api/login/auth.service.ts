@@ -24,7 +24,11 @@ export class AuthService {
     private readonly registerUserService: RegisterUserService,
     private readonly snackbarService: MatSnackBar,
     private readonly cookieService: CookieService
-  ) {}
+  ) {
+    window.localStorage.getItem('tokenJwt')
+      ? (this.userAuthentication = of(true))
+      : (this.userAuthentication = of(false));
+  }
 
   async login(user: UserLogin) {
     return this.loginService.login(user).subscribe(
@@ -46,7 +50,8 @@ export class AuthService {
   setUserCredentials(userModel: UserLoginResponse) {
     window.localStorage.setItem('tokenJwt', userModel.token as string);
 
-    this.cookieService.setCookie('id', userModel.id, 40000);
+    this.cookieService.setCookie('id', userModel.user.id, 4000, 'user/');
+    this.cookieService.setCookie('email', userModel.user.email, 4000, 'user/');
   }
 
   async register(user: UserRequest) {

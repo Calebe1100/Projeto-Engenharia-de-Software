@@ -13,7 +13,7 @@
             <mat-card class="w-full min-w-50 h-full">
                 <div *ngIf="listDiscipline; else noDisciplines" fxFill fxLayout="column">
                     <ngx-datatable class="material scrolling" [rows]="listDiscipline"
-                        [columnMode]="'force'" [scrollbarH]="true" [scrollbarV]="true" [reorderable]="false" [selectionType]="SelectionType.single">
+                        [columnMode]="'force'" [scrollbarH]="true" [scrollbarV]="true" [reorderable]="false" [selectionType]="SelectionType.single" [selected]="selected">
                         
                         <ngx-datatable-column name="Selecionar"  [width]="10">
                             <ng-template
@@ -72,7 +72,7 @@
                     </ngx-datatable>
                 </div>
             </mat-card>
-            <div fxLayoutAlign="end center" fxLayoutGap="10px" *ngIf="(authService.userAuthentication|async)">
+            <div fxLayoutAlign="end center" fxLayoutGap="10px" *ngIf="(authService.userAuthentication|async)" class="buttons-group">
                 <button mat-button style="background-color: #2fd48a;" (click)="emitStudying()">Concluída</button>
                 <button mat-button style="background-color: #c97924;" (click)="emitCompleted()">Cursando</button>          
                 <button mat-button style="background-color: #D9D9D9;" (click)="openDialog()">Cadastrar
