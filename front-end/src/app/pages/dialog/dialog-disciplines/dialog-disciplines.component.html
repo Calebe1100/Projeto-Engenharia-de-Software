@@ -1,25 +1,27 @@
-<h1 mat-dialog-title class="title-popup">Cadastro de disciplinas</h1>
-<div mat-dialog-content class="content-popup">
-  <span class="subtitle-popup"> Selecione a disciplina e o status dela:</span>
-  <p class="line-border-popup"></p>
+<div class="wrapper" [formGroup]="popupForm" >
+  <h1 mat-dialog-title class="title-popup">Cadastro de disciplinas</h1>
+  <div mat-dialog-content class="content-popup">
+    <span class="subtitle-popup"> Selecione a disciplina e o status dela:</span>
+    <p class="line-border-popup"></p>
     <p>Disiciplina</p>
     <div class="row mat-dialog-content" fxLayout="row" fxLayoutGap="1rem">
-      <select formControlName="course" class="form-control" class="select-popup" label="...">
+      <select formControlName="discipline" class="form-control" class="select-popup" label="...">
         <option *ngFor="let discipline of listDiscipline" [ngValue]="discipline">
           {{ discipline.name }}
         </option>
       </select>
-      <div class="select-checkbox" fxLayoutGap="1rem" fxLayoutAlign="center end">
+      <div class="select-checkbox" fxLayoutGap="1rem" fxLayoutAlign="end">
         <span>Status:</span>
-        <label *ngFor="let radiobutton of radioItems">
-          <input type="radio" name="options" (click)="model.option = radiobutton" (change)="onRadioChange(radiobutton)"
-          [checked]="radiobutton === model.option" class="select-checkbox">{{radiobutton}}
+        <label *ngFor="let status of radioItems" formControlName="status" >
+          <input type="radio" name="options" (click)="model.option = status" (change)="onRadioChange(status)"
+          [checked]="status === model.option" class="select-checkbox">{{status}}
         </label>
-       </div>
+      </div>
     </div>
     
-</div>
-<div mat-dialog-actions flex fxLayoutAlign="end end">
-  <button mat-button mat-dialog-close style="background-color: #D9D9D9;">Close</button>
-  <button mat-button style="background-color: #2fd48a">Salvar</button>
+  </div>
+  <div mat-dialog-actions flex fxLayoutAlign="end end">
+    <button mat-button mat-dialog-close style="background-color: #D9D9D9;">Close</button>
+    <button mat-button style="background-color: #2fd48a" (click)="onSubmit()">Salvar</button>
+  </div>
 </div>

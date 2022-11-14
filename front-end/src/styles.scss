@@ -38,6 +38,10 @@ $cefet_road_map-theme: mat.define-light-theme(
 body {
   //background: linear-gradient(90deg, #3F2B96 0%, #A8C0FF 100%);
   background: #e8e8e8;
+  button,
+  select {
+    outline: none !important;
+  }
 }
 body {
   margin: 0;
