@@ -1,39 +1,44 @@
-'use strict';
+/* 'use strict';
 
 module.exports = {
   async up (queryInterface, Sequelize) {
     await queryInterface.createTable('user',{
       id: {
-        type: Sequelize.UUID,
+        type: DataTypes.UUID,
         defaultValue: Sequelize.UUIDV4,
         primaryKey: true,
       },
       name: {
-        type: Sequelize.STRING(100),
+        type: DataTypes.STRING(100),
         allowNull: true,
       },
       email: {
-        type: Sequelize.STRING(255),
+        type: DataTypes.STRING(255),
         allowNull: false,
         unique: true,
       },
       password: {
-        type: Sequelize.STRING(20),
+        type: DataTypes.STRING(20),
         allowNull: false,
         unique: true,
       },
       registration: {
-        type: Sequelize.STRING(11),
+        type: DataTypes.STRING(11),
         allowNull: false,
       },
       birth_date: {
-        type: Sequelize.DATE,
+        type: DataTypes.DATE,
         allowNull: false,
       },
       period: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: true,
       },
+      idCourse: {
+        type: DataTypes.UUID,
+        references: { model: 'course', key: 'id' },
+        onDelete: 'CASCADE'
+      }
     } )
   },
 
@@ -42,3 +47,56 @@ module.exports = {
      await queryInterface.dropTable('user');   
   }
 };
+ */
+
+module.exports = {
+  up: (queryInterface, Sequelize) => {
+    return queryInterface.createTable('user', {
+      id: {
+        type: Sequelize.DataTypes.UUID,
+        defaultValue: Sequelize.UUIDV4,
+        primaryKey: true,
+      },
+      name: {
+        type: Sequelize.DataTypes.STRING(100),
+        allowNull: true,
+      },
+      email: {
+        type: Sequelize.DataTypes.STRING(255),
+        allowNull: false,
+        unique: true,
+      },
+      password: {
+        type: Sequelize.DataTypes.STRING(20),
+        allowNull: false,
+        unique: true,
+      },
+      registration: {
+        type: Sequelize.DataTypes.STRING(11),
+        allowNull: false,
+      },
+      birth_date: {
+        type: Sequelize.DataTypes.DATE,
+        allowNull: false,
+      },
+      period: {
+        type: Sequelize.DataTypes.INTEGER,
+        allowNull: true,
+      },
+      idCourse: {
+        type: Sequelize.DataTypes.UUID,
+        references: {
+          model: {
+            tableName: 'course',
+            schema: 'public'
+          },
+          key: 'id'
+        },
+        onDelete: 'CASCADE'
+      }
+    });
+  },
+  down: (queryInterface, Sequelize) => {
+    return queryInterface.dropTable('user');
+  }
+}
