@@ -1,9 +1,7 @@
-import fetch from "node-fetch";
 import uuidv4 from 'uuid';
 'use strict';
 
-module.exports = {
-  async up(queryInterface, Sequelize) {
+export async function up(queryInterface, Sequelize) {
 
     return queryInterface.bulkInsert('discipline', [
       { id:uuidv4(), name: 'TÓPICOS ESPECIAIS EM ENGENHARIA DE SOFTWARE: BANCO DE DADOS NÃO RELACIONAL - NOSQL', workload: 30, description: 'GT07ESO0 02.1' , idCourse: 1, typeDiscipline: 2},
@@ -150,9 +148,9 @@ module.exports = {
       { id:uuidv4(), name: 'ENADE CONCLUINTE PENDENTE', workload: 0  , description: 'ENADE' , idCourse: 1, typeDiscipline: 1},
     ]);
 
-  },
+  }
 
-  async down(queryInterface, Sequelize) {
+  export async function down(queryInterface, Sequelize) {
     //implements down
   }
-};
+
