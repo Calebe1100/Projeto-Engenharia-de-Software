@@ -8,7 +8,7 @@ export default db.define("course", {
     primaryKey: true,
   },
   name: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(100),
     allowNull: false,
   },
   mandatory_workload: {
@@ -24,7 +24,7 @@ export default db.define("course", {
     allowNull: false,
   },
   description: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(255),
     allowNull: true,
   }
 }, 
