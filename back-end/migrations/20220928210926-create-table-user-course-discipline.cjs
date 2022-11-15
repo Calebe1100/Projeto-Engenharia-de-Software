@@ -1,6 +1,7 @@
 'use strict';
 
-export async function up(queryInterface, Sequelize) {
+module.exports = {
+  async  up(queryInterface, Sequelize) {
   await queryInterface.createTable('user_course_discipline', {
     init_date: {
       type: DataTypes.DATEONLY,
@@ -50,11 +51,12 @@ export async function up(queryInterface, Sequelize) {
       },
       onDelete: 'CASCADE'
     }
-  });
+  })
 
-}
-export async function down(queryInterface, Sequelize) {
+},
+ async down(queryInterface, Sequelize) {
 
   await queryInterface.dropTable('user_course_discipline');
 
+}
 }

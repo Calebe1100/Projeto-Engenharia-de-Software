@@ -1,5 +1,5 @@
 import { DataTypes } from "sequelize";
-import Course from "./course";
+import Course from "./course.js";
 import db from "./db.js";
 
 const User = db.define("user", {

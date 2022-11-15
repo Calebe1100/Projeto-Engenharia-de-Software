@@ -1,6 +1,7 @@
  'use strict';
 
-export function up(queryInterface, Sequelize) {
+ module.exports = {
+  async up(queryInterface, Sequelize) {
   return queryInterface.createTable('user', {
     id: {
       type: Sequelize.DataTypes.UUID,
@@ -44,9 +45,12 @@ export function up(queryInterface, Sequelize) {
       },
       onDelete: 'CASCADE'
     }
-  });
+  })
 }
+,
 
-export function down(queryInterface, Sequelize) {
+  async down(queryInterface, Sequelize) {
   return queryInterface.dropTable('user');
 }
+}
+  
