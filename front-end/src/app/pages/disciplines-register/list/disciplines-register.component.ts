@@ -20,7 +20,6 @@ import { DialogDisciplinesComponent } from '../../dialog/dialog-disciplines/dial
 export class DisciplinesRegisterComponent implements OnInit {
   searchInputControl: UntypedFormControl = new UntypedFormControl();
   discipline: boolean = false;
-  //private disciplineDialog: MatDialogRef<DialogDisciplinesComponent, any>;
   listDiscipline: SystemDiscipline[] = [];
   filterListDiscipline: SystemDiscipline[] = [];
 
@@ -95,7 +94,6 @@ export class DisciplinesRegisterComponent implements OnInit {
   }
 
   onSelect(disciplineSelected: SystemDiscipline) {
-    const disciplineIdSelected = '';
     if (
       this.listDisciplineSelected.some(
         (discipline) => discipline.id == disciplineSelected.id

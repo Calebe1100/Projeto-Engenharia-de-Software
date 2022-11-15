@@ -15,6 +15,10 @@ import db from "./db.js";
     type: DataTypes.INTEGER,
     allowNull: false,
   },
+  typeDiscipline: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
   description: {
     type: DataTypes.STRING,
     allowNull: true,

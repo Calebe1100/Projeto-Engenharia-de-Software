@@ -21,5 +21,10 @@
 
   .select-checkbox {
     margin-right: 3px;
+    margin-top: 4px;
   }
+}
+
+datatable-row-wrapper:hover {
+  border: 1px solid red;
 }
