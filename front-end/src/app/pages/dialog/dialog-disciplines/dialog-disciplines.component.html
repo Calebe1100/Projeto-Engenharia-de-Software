@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 <div class="wrapper" [formGroup]="popupForm" >
   <h1 mat-dialog-title class="title-popup">Cadastro de disciplinas</h1>
   <div mat-dialog-content class="content-popup">
@@ -25,3 +26,56 @@
     <button mat-button style="background-color: #2fd48a" (click)="onSubmit()">Salvar</button>
   </div>
 </div>
+=======
+<h1 mat-dialog-title>Cadastro de disciplinas</h1>
+<div mat-dialog-content>
+  <div *ngIf="listDiscipline; else noDisciplines" fxFill fxLayout="column">
+    <ngx-datatable class="material scrolling" [rows]="listDiscipline" [columnMode]="'force'" [scrollbarH]="true"
+      [scrollbarV]="true" [reorderable]="false">
+
+      <!-- <ngx-datatable-column name="Selecionar" [width]="10">
+        <ng-template ngx-datatable-cell-template let-row="row">
+          <input fxLayoutAlign="center center" type="checkbox" (click)='onSelect(row)'
+            [checked]="isRowSelected(row.id)" />
+        </ng-template>
+      </ngx-datatable-column> -->
+
+      <ngx-datatable-column name="Name" [flexGrow]="1.5">
+        <ng-template ngx-datatable-header-template>
+          Nome
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="workload" [flexGrow]="1.5">
+        <ng-template ngx-datatable-header-template>
+          <span fxLayoutAlign="center center">Carga Horária</span>
+        </ng-template>
+        <ng-template let-column="workload">
+        </ng-template>
+        <ng-template let-value="value" ngx-datatable-cell-template let-rowIndex="rowIndex">
+          <span fxLayoutAlign="center center">{{value}}</span>
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="description" [flexGrow]="1.5">
+        <ng-template ngx-datatable-header-template>
+          <span fxLayoutAlign="center center">Descrição</span>
+        </ng-template>
+        <ng-template let-column="description">
+        </ng-template>
+        <ng-template let-value="value" ngx-datatable-cell-template let-rowIndex="rowIndex">
+          <span fxLayoutAlign="center center">{{value}}</span>
+        </ng-template>
+      </ngx-datatable-column>
+
+    </ngx-datatable>
+  </div>
+
+  <ng-template #noDisciplines>
+    <div class="text-center">Não possui disciplinas cadastradas</div>
+  </ng-template>
+</div>
+<div mat-dialog-actions fxLayoutAlign="end center">
+  <button mat-button mat-dialog-close>Close</button>
+</div>
+>>>>>>> Stashed changes

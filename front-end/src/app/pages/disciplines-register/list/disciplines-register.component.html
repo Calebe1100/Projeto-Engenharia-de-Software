@@ -2,16 +2,17 @@
     <mat-form-field class="w-full min-w-50" fxLayoutAlign="center center">
         <input matInput (keyup.enter)="
         updateResults()
-        "[formControl]="searchInputControl" [autocomplete]="'off'" placeholder="Pesquisar disciplina" />
+        " [formControl]="searchInputControl" [autocomplete]="'off'" placeholder="Pesquisar disciplina" />
         <button matSuffix mat-icon-button class="icon-size-5">
             <mat-icon>search</mat-icon>
         </button>
     </mat-form-field>
 
-    <div class="w-full min-w-50" fxLayoutAlign="center stretch">
-        <div class="w-75 min-w-50"  fxLayout="column" fxLayoutGap="10px">
+    <div class="w-full min-w-50" fxLayoutAlign="center ">
+        <div class="w-75 min-w-50" fxLayout="column" fxLayoutGap="10px">
             <mat-card class="w-full min-w-50 h-full">
                 <div *ngIf="listDiscipline; else noDisciplines" fxFill fxLayout="column">
+<<<<<<< Updated upstream
                     <ngx-datatable class="material scrolling" [rows]="listDiscipline"
                         [columnMode]="'force'" [scrollbarH]="true" [scrollbarV]="true" [reorderable]="false" [selectionType]="SelectionType.single" [selected]="selected">
                         
@@ -25,9 +26,20 @@
                                     (click)='onSelect(row)'
                                     [checked]="isRowSelected(row.id)"
                                     />
+=======
+                    <ngx-datatable class="material scrolling" [rows]="listDiscipline" [columnMode]="'force'"
+                        [scrollbarH]="true" [scrollbarV]="true" [reorderable]="false"
+                        [selectionType]="SelectionType.single">
+
+                        <ngx-datatable-column *ngIf="(authService.userAuthentication|async)" name="Selecionar"
+                            [width]="10">
+                            <ng-template ngx-datatable-cell-template let-row="row">
+                                <input fxLayoutAlign="center center" type="checkbox" (click)='onSelect(row)'
+                                    [checked]="isRowSelected(row.id)" />
+>>>>>>> Stashed changes
                             </ng-template>
                         </ngx-datatable-column>
-                
+
                         <ngx-datatable-column name="Name" [flexGrow]="1.5">
                             <ng-template ngx-datatable-header-template>
                                 Nome
@@ -36,7 +48,7 @@
 
                         <ngx-datatable-column name="workload" [flexGrow]="1.5">
                             <ng-template ngx-datatable-header-template>
-                               <span fxLayoutAlign="center center">Carga Horária</span>
+                                <span fxLayoutAlign="center center">Carga Horária</span>
                             </ng-template>
                             <ng-template let-column="workload">
                             </ng-template>
@@ -56,9 +68,10 @@
                             </ng-template>
                         </ngx-datatable-column>
 
-                        <ngx-datatable-column name="status" [flexGrow]="1.5">
+                        <ngx-datatable-column *ngIf="(authService.userAuthentication|async)" name="status"
+                            [flexGrow]="1.5">
                             <ng-template ngx-datatable-header-template>
-                               <span fxLayoutAlign="center center">Status</span>
+                                <span fxLayoutAlign="center center">Status</span>
                             </ng-template>
                             <ng-template let-column="status">
                             </ng-template>
@@ -66,15 +79,12 @@
                                 <span fxLayoutAlign="center center">{{value}}</span>
                             </ng-template>
                         </ngx-datatable-column>
-
-
-
                     </ngx-datatable>
                 </div>
             </mat-card>
             <div fxLayoutAlign="end center" fxLayoutGap="10px" *ngIf="(authService.userAuthentication|async)" class="buttons-group">
                 <button mat-button style="background-color: #2fd48a;" (click)="emitStudying()">Concluída</button>
-                <button mat-button style="background-color: #c97924;" (click)="emitCompleted()">Cursando</button>          
+                <button mat-button style="background-color: #c97924;" (click)="emitCompleted()">Cursando</button>
                 <button mat-button style="background-color: #D9D9D9;" (click)="openDialog()">Cadastrar
                     disciplina</button>
             </div>

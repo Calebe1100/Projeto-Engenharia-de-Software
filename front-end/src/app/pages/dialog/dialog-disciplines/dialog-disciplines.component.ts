@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import { Component, OnInit } from '@angular/core';
 import {
   UntypedFormControl,
@@ -7,6 +8,10 @@ import {
 import { DisciplineService } from 'src/services/api/disciplines/discipline.service';
 import { SystemDiscipline } from 'src/services/api/system-disciplines/interface/SystemDiscipline';
 import { SystemDisciplinesService } from 'src/services/api/system-disciplines/system-discipline.service';
+=======
+import { Component, OnInit, Input } from '@angular/core';
+import { SystemDiscipline } from 'src/services/api/system-disciplines/interface/SystemDiscipline';
+>>>>>>> Stashed changes
 
 @Component({
   selector: 'app-dialog-disciplines',
@@ -17,6 +22,7 @@ export class DialogDisciplinesComponent implements OnInit {
   listDiscipline?: SystemDiscipline[];
   model = { option: 'Pendente' };
 
+<<<<<<< Updated upstream
   popupForm: UntypedFormGroup;
 
   selectStatus = '';
@@ -44,6 +50,13 @@ export class DialogDisciplinesComponent implements OnInit {
   onRadioChange(radiobutton: string) {
     this.selectStatus = radiobutton;
     this.popupForm.controls['status'].setValue(radiobutton);
+=======
+  listDiscipline: SystemDiscipline[] = [];
+  constructor() { }
+
+  ngOnInit(): void {
+    console.log(this.listDiscipline);
+>>>>>>> Stashed changes
   }
 
   onSubmit() {

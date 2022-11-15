@@ -66,7 +66,8 @@ export class DisciplinesRegisterComponent implements OnInit {
   }
 
   openDialog() {
-    this.dialog.open(DialogDisciplinesComponent);
+    let dialogRef = this.dialog.open(DialogDisciplinesComponent);
+    dialogRef.componentInstance.listDiscipline = this.listDiscipline;
   }
 
   async updateResults() {
