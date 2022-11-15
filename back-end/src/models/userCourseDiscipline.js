@@ -13,6 +13,10 @@ import User from "./user.js";
     type: DataTypes.DATEONLY,
     allowNull: false,
   },
+  status: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  }
 }, 
 {
   // don't add the timestamp attributes (updatedAt, createdAt)
