@@ -3,33 +3,51 @@
 export async function up(queryInterface, Sequelize) {
   await queryInterface.createTable('user_course_discipline', {
     init_date: {
-      type: Sequelize.DATE,
+      type: DataTypes.DATEONLY,
       allowNull: false,
     },
 
     finish_date: {
-      type: Sequelize.DATE,
+      type: DataTypes.DATEONLY,
       allowNull: false,
     },
     status: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     idCourse: {
-      type: Sequelize.INTEGER,
-      references: { model: 'course', key: 'id' },
+      type: DataTypes.UUID,
+      references: {
+        model: {
+          tableName: 'course',
+          schema: 'public'
+        },
+        key: 'id'
+      },
       onDelete: 'CASCADE'
     },
 
     idDiscipline: {
-      type: Sequelize.UUID,
-      references: { model: 'discipline', key: 'id' },
+      type: DataTypes.UUID,
+      references: {
+        model: {
+          tableName: 'discipline',
+          schema: 'public'
+        },
+        key: 'id'
+      },
       onDelete: 'CASCADE'
     },
 
     idUser: {
-      type: Sequelize.UUID,
-      references: { model: 'user', key: 'id' },
+      type: DataTypes.UUID,
+      references: {
+        model: {
+          tableName: 'user',
+          schema: 'public'
+        },
+        key: 'id'
+      },
       onDelete: 'CASCADE'
     }
   });

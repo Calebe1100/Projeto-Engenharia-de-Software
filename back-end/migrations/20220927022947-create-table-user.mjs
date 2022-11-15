@@ -1,41 +1,52 @@
-'use strict';
+ 'use strict';
 
-export async function up(queryInterface, Sequelize) {
-  await queryInterface.createTable('user', {
+export function up(queryInterface, Sequelize) {
+  return queryInterface.createTable('user', {
     id: {
-      type: Sequelize.UUID,
+      type: Sequelize.DataTypes.UUID,
       defaultValue: Sequelize.UUIDV4,
       primaryKey: true,
     },
     name: {
-      type: Sequelize.STRING(100),
+      type: Sequelize.DataTypes.STRING(100),
       allowNull: true,
     },
     email: {
-      type: Sequelize.STRING(255),
+      type: Sequelize.DataTypes.STRING(255),
       allowNull: false,
       unique: true,
     },
     password: {
-      type: Sequelize.STRING(20),
+      type: Sequelize.DataTypes.STRING(20),
       allowNull: false,
       unique: true,
     },
     registration: {
-      type: Sequelize.STRING(11),
+      type: Sequelize.DataTypes.STRING(11),
       allowNull: false,
     },
     birth_date: {
-      type: Sequelize.DATE,
+      type: Sequelize.DataTypes.DATE,
       allowNull: false,
     },
     period: {
-      type: Sequelize.INTEGER,
+      type: Sequelize.DataTypes.INTEGER,
       allowNull: true,
     },
+    idCourse: {
+      type: Sequelize.DataTypes.UUID,
+      references: {
+        model: {
+          tableName: 'course',
+          schema: 'public'
+        },
+        key: 'id'
+      },
+      onDelete: 'CASCADE'
+    }
   });
 }
-export async function down(queryInterface, Sequelize) {
 
-  await queryInterface.dropTable('user');
+export function down(queryInterface, Sequelize) {
+  return queryInterface.dropTable('user');
 }
