@@ -52,7 +52,12 @@ export class DisciplinesRegisterComponent implements OnInit {
   ngOnInit(): void {
     this.systemDisciplinesService.listSystemDisciplines().subscribe((resp) => {
       this.listDiscipline = resp.list.map((discipline: SystemDiscipline) => {
-        return { ...discipline, status: 'Não iniciado' };
+        return {
+          ...discipline,
+          status: 'Não iniciado',
+          descriptionDiscipline:
+            discipline.typeDiscipline === 1 ? 'Obrigatória' : 'Optativa',
+        };
       }) as SystemDiscipline[];
       this.filterListDiscipline = this.listDiscipline;
     });

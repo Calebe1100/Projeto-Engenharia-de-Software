@@ -12,7 +12,6 @@
         <div class="w-75 min-w-50" fxLayout="column" fxLayoutGap="10px">
             <mat-card class="w-full min-w-50 h-full">
                 <div *ngIf="listDiscipline; else noDisciplines" fxFill fxLayout="column">
-<<<<<<< Updated upstream
                     <ngx-datatable class="material scrolling" [rows]="listDiscipline"
                         [columnMode]="'force'" [scrollbarH]="true" [scrollbarV]="true" [reorderable]="false" [selectionType]="SelectionType.single" [selected]="selected">
                         
@@ -26,17 +25,6 @@
                                     (click)='onSelect(row)'
                                     [checked]="isRowSelected(row.id)"
                                     />
-=======
-                    <ngx-datatable class="material scrolling" [rows]="listDiscipline" [columnMode]="'force'"
-                        [scrollbarH]="true" [scrollbarV]="true" [reorderable]="false"
-                        [selectionType]="SelectionType.single">
-
-                        <ngx-datatable-column *ngIf="(authService.userAuthentication|async)" name="Selecionar"
-                            [width]="10">
-                            <ng-template ngx-datatable-cell-template let-row="row">
-                                <input fxLayoutAlign="center center" type="checkbox" (click)='onSelect(row)'
-                                    [checked]="isRowSelected(row.id)" />
->>>>>>> Stashed changes
                             </ng-template>
                         </ngx-datatable-column>
 
@@ -57,11 +45,11 @@
                             </ng-template>
                         </ngx-datatable-column>
 
-                        <ngx-datatable-column name="description" [flexGrow]="1.5">
+                        <ngx-datatable-column name="descriptionDiscipline" [flexGrow]="1.5">
                             <ng-template ngx-datatable-header-template>
                                 <span fxLayoutAlign="center center">Tipo da disciplina</span>
                             </ng-template>
-                            <ng-template let-column="description">
+                            <ng-template let-column="descriptionDiscipline">
                             </ng-template>
                             <ng-template let-value="value" ngx-datatable-cell-template let-rowIndex="rowIndex">
                                 <span fxLayoutAlign="center center">{{value}}</span>

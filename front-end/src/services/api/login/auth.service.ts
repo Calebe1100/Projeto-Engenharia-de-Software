@@ -22,7 +22,6 @@ export class AuthService {
     private readonly router: Router,
     private readonly loginService: LoginService,
     private readonly registerUserService: RegisterUserService,
-<<<<<<< Updated upstream
     private readonly snackbarService: MatSnackBar,
     private readonly cookieService: CookieService
   ) {
@@ -30,10 +29,6 @@ export class AuthService {
       ? (this.userAuthentication = of(true))
       : (this.userAuthentication = of(false));
   }
-=======
-    private readonly snackbarService: MatSnackBar
-  ) { }
->>>>>>> Stashed changes
 
   async login(user: UserLogin) {
     return this.loginService.login(user).subscribe(

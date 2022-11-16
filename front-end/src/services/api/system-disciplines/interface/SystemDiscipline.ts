@@ -7,4 +7,10 @@ export interface SystemDiscipline {
   name: string;
   workload: number;
   status: DisciplineStatus;
+  typeDiscipline: TypeDiscipline;
+}
+
+export enum TypeDiscipline {
+  Obrigatoria = 1,
+  Optativa = 2,
 }
