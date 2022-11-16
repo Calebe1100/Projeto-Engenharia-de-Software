@@ -10,7 +10,7 @@ module.exports = {
 
     finish_date: {
       type: Sequelize.DataTypes.DATEONLY,
-      allowNull: false,
+      allowNull: true,
     },
     status: {
       type: Sequelize.DataTypes.INTEGER,
@@ -25,6 +25,7 @@ module.exports = {
         },
         key: 'id'
       },
+      allowNull: false,
       onDelete: 'CASCADE'
     },
     idDiscipline: {
@@ -36,6 +37,7 @@ module.exports = {
         },
         key: 'id'
       },
+      allowNull: false,
       onDelete: 'CASCADE'
     },
     idUser: {
@@ -47,6 +49,7 @@ module.exports = {
         },
         key: 'id'
       },
+      allowNull: false,
       onDelete: 'CASCADE'
     }
   })
