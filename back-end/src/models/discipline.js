@@ -1,5 +1,6 @@
 import { DataTypes } from "sequelize";
 import db from "./db.js";
+import Course from "./course";
 
  const discipline = db.define("discipline", {
   id: {
@@ -22,11 +23,6 @@ import db from "./db.js";
   description: {
     type: DataTypes.STRING,
     allowNull: true,
-  },
-  idCourse: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
-    primaryKey: true,
   }
 }, 
 {
@@ -40,6 +36,20 @@ import db from "./db.js";
   updatedAt: false,
 
   freezeTableName: true
+});
+
+discipline.belongsTo(Course, {
+  constraint: true,
+  foreignKey: 'idCourse',
+  onDelete: 'CASCADE',
+  allowNull: false,
+});
+
+Course.hasMany(discipline, {
+  constraint: true,
+  foreignKey: 'idCourse',
+  onDelete: 'CASCADE',
+  allowNull: false,
 });
 
 export default discipline;

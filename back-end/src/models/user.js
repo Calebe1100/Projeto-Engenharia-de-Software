@@ -1,5 +1,4 @@
 import { DataTypes } from "sequelize";
-import Course from "./course.js";
 import db from "./db.js";
 
 const User = db.define("user", {
@@ -33,11 +32,6 @@ const User = db.define("user", {
   period: {
     type: DataTypes.INTEGER,
     allowNull: true,
-  },
-  idCourse: {
-    type: DataTypes.UUID,
-    references: { model: 'course', key: 'id' },
-    onDelete: 'CASCADE'
   }
 }, 
 {
@@ -51,13 +45,6 @@ const User = db.define("user", {
   updatedAt: false,
 
   freezeTableName: true
-});
-
-User.belongsTo(Course, {
-  constraint: true,
-  foreignKey: 'idCourse',
-  onDelete: 'CASCADE',
-  allowNull: false,
 });
 
 export default User;
