@@ -4,20 +4,20 @@ module.exports = {
   async  up(queryInterface, Sequelize) {
   await queryInterface.createTable('user_course_discipline', {
     init_date: {
-      type: DataTypes.DATEONLY,
+      type: Sequelize.DataTypes.DATEONLY,
       allowNull: false,
     },
 
     finish_date: {
-      type: DataTypes.DATEONLY,
+      type: Sequelize.DataTypes.DATEONLY,
       allowNull: false,
     },
     status: {
-      type: DataTypes.INTEGER,
+      type: Sequelize.DataTypes.INTEGER,
       allowNull: false,
     },
     idCourse: {
-      type: DataTypes.UUID,
+      type: Sequelize.DataTypes.UUID,
       references: {
         model: {
           tableName: 'course',
@@ -27,9 +27,8 @@ module.exports = {
       },
       onDelete: 'CASCADE'
     },
-
     idDiscipline: {
-      type: DataTypes.UUID,
+      type: Sequelize.DataTypes.UUID,
       references: {
         model: {
           tableName: 'discipline',
@@ -39,9 +38,8 @@ module.exports = {
       },
       onDelete: 'CASCADE'
     },
-
     idUser: {
-      type: DataTypes.UUID,
+      type: Sequelize.DataTypes.UUID,
       references: {
         model: {
           tableName: 'user',

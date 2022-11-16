@@ -4,27 +4,27 @@ module.exports = {
   async  up(queryInterface, Sequelize) {
   await queryInterface.createTable('course', {
     id: {
-      type: DataTypes.INTEGER,
+      type: Sequelize.DataTypes.UUID,
       primaryKey: true,
     },
     name: {
-      type: DataTypes.STRING(100),
+      type: Sequelize.DataTypes.STRING(100),
       allowNull: false,
     },
     mandatory_workload: {
-      type: DataTypes.INTEGER,
+      type: Sequelize.DataTypes.INTEGER,
       allowNull: false,
     },
     optional_workload: {
-      type: DataTypes.INTEGER,
+      type: Sequelize.DataTypes.INTEGER,
       allowNull: false,
     },
     complementary_workload: {
-      type: DataTypes.INTEGER,
+      type: Sequelize.DataTypes.INTEGER,
       allowNull: false,
     },
     description: {
-      type: DataTypes.STRING(255),
+      type: Sequelize.DataTypes.STRING(255),
       allowNull: true,
     }
   })

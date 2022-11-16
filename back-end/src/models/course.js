@@ -1,9 +1,9 @@
 import { DataTypes } from "sequelize";
 import db from "./db.js";
 
-export default db.define("course", {
+const Course = db.define("course", {
   id: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
   },
@@ -40,3 +40,5 @@ export default db.define("course", {
 
   freezeTableName: true
 });
+
+export default Course;

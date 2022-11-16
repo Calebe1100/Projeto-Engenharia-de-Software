@@ -5,6 +5,7 @@ import systemDisciplines from "../api/controllers/systemDisciplinesController.js
 import userDisciplines from "../api/controllers/userDisciplinesController.js";
 import users from "../api/controllers/usersController.js";
 import midiawareJwt from "../api/controllers/sharedController.js";
+import userDisciplinesCourseController from "./controllers/userDisciplinesCourseController.js";
 
 const routes = express.Router();
 
@@ -26,5 +27,9 @@ routes.post("/disciplines", midiawareJwt.verifyJWT, userDisciplines.store);
 /*-----------SystemDisciplines-------------*/
 routes.get("/system-disciplines",  systemDisciplines.findAll);
 routes.post("/system-disciplines", midiawareJwt.verifyJWT, systemDisciplines.store);
+
+/*-----------UserCourseDiscipline-------------*/
+routes.get("/user-disciplines-course", userDisciplinesCourseController.findAll);
+routes.post("/user-disciplines-course",  userDisciplinesCourseController.store);
 
 export { routes as default };
