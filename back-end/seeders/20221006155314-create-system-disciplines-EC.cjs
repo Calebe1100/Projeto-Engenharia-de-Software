@@ -1,7 +1,8 @@
-import uuidv4 from 'uuid';
+const { v4: uuidv4 } = require('uuid');
 'use strict';
 
-export async function up(queryInterface, Sequelize) {
+module.exports = {
+  async up(queryInterface, Sequelize) {
 
     return queryInterface.bulkInsert('discipline', [
       { id:uuidv4(), name: 'TÓPICOS ESPECIAIS EM ENGENHARIA DE SOFTWARE: BANCO DE DADOS NÃO RELACIONAL - NOSQL', workload: 30, description: 'GT07ESO0 02.1' , idCourse: 1, typeDiscipline: 2},
@@ -148,9 +149,9 @@ export async function up(queryInterface, Sequelize) {
       { id:uuidv4(), name: 'ENADE CONCLUINTE PENDENTE', workload: 0  , description: 'ENADE' , idCourse: 1, typeDiscipline: 1},
     ]);
 
-  }
+  },
 
-  export async function down(queryInterface, Sequelize) {
+   async  down(queryInterface, Sequelize) {
     //implements down
   }
-
+}

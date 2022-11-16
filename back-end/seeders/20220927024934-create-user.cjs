@@ -1,6 +1,7 @@
 'use strict';
 
-export async function up(queryInterface, Sequelize) {
+module.exports = {
+  async up(queryInterface, Sequelize) {
 
   return queryInterface.bulkInsert('user', [
     {
@@ -8,7 +9,8 @@ export async function up(queryInterface, Sequelize) {
     }
   ]);
 
-}
-export async function down(queryInterface, Sequelize) {
+},
+ async  down(queryInterface, Sequelize) {
   //implements down
+}
 }
