@@ -16,7 +16,7 @@ const UserCourseDiscipline = db.define("user_course_discipline", {
   },
   finish_date: {
     type: DataTypes.DATEONLY,
-    allowNull: false,
+    allowNull: true,
   },
   status: {
     type: DataTypes.INTEGER,

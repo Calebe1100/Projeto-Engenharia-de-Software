@@ -2,32 +2,24 @@
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-  await queryInterface.createTable('discipline', {
+  await queryInterface.createTable('requirement', {
     id: {
       type: Sequelize.DataTypes.UUID,
       defaultValue: Sequelize.UUIDV4,
       primaryKey: true,
     },
-    name: {
-      type: Sequelize.DataTypes.STRING(100),
-      allowNull: false,
-    },
-    workload: {
+    typeRequirement: {
       type: Sequelize.DataTypes.INTEGER,
       allowNull: false,
     },
-    typeDiscipline: {
-      type: Sequelize.DataTypes.INTEGER,
+    idDisciplineRequired: {
+      type: Sequelize.DataTypes.UUID,
       allowNull: false,
-    },  
-    description: {
-      type: Sequelize.DataTypes.STRING(255),
-      allowNull: true,
     },
-    idCourse: {
+    idDiscipline: {
       type: Sequelize.DataTypes.UUID,
       references: {
-        model: 'course',
+        model: 'discipline',
         key: 'id'
       },
       allowNull: false,
@@ -39,7 +31,7 @@ module.exports = {
 ,
  async  down(queryInterface, Sequelize) {
 
-  await queryInterface.dropTable('discipline');
+  await queryInterface.dropTable('requirement');
 
 }
 }

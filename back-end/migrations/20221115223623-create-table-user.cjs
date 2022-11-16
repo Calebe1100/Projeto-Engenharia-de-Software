@@ -10,7 +10,7 @@ module.exports = {
    },
    name: {
      type: Sequelize.DataTypes.STRING(100),
-     allowNull: true,
+     allowNull: false,
    },
    email: {
      type: Sequelize.DataTypes.STRING(255),
