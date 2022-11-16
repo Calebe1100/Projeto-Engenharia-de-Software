@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
-import db from "./db.js";
+import db from "./db.mjs";
 
-const User = db.define("user", {
+const Course = db.define("course", {
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
@@ -11,26 +11,20 @@ const User = db.define("user", {
     type: DataTypes.STRING(100),
     allowNull: false,
   },
-  email: {
-    type: DataTypes.STRING(255),
-    allowNull: false,
-    unique: true,
-  },
-  password: {
-    type: DataTypes.STRING(20),
-    allowNull: false,
-    unique: true,
-  },
-  registration: {
-    type: DataTypes.STRING(11),
-    allowNull: false,
-  },
-  birth_date: {
-    type: DataTypes.DATEONLY,
-    allowNull: false,
-  },
-  period: {
+  mandatory_workload: {
     type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  optional_workload: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  complementary_workload: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  description: {
+    type: DataTypes.STRING(255),
     allowNull: true,
   }
 }, 
@@ -47,4 +41,4 @@ const User = db.define("user", {
   freezeTableName: true
 });
 
-export default User;
+export default Course;

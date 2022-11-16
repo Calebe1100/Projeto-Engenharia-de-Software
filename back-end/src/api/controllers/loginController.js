@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import UserRepository from "../../models/user.js";
+import UserRepository from "../../models/user.mjs";
 
 async function login(req, res) {
   

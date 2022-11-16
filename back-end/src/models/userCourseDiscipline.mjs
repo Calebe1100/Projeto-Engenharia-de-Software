@@ -1,8 +1,8 @@
 import { DataTypes } from "sequelize";
-import Course from "./course.js";
-import db from "./db.js";
-import Discipline from "./discipline.js";
-import User from "./user.js";
+import Course from "./course.mjs";
+import db from "./db.mjs";
+import Discipline from "./discipline.mjs";
+import User from "./user.mjs";
 
 const UserCourseDiscipline = db.define("user_course_discipline", {
   id: {

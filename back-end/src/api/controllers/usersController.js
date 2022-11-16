@@ -1,7 +1,6 @@
 import * as yup from 'yup';
-import UserRepository from "../../models/user.js";
-import DisciplineRepository from "../../models/discipline.js";
-import UserCourseDisciplineRepository from "../../models/userCourseDiscipline";
+import DisciplineRepository from "../../models/discipline.mjs";
+import UserRepository from "../../models/user.mjs";
 
 async function findAll(req, res) {
 

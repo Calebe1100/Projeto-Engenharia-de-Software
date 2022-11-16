@@ -1,5 +1,5 @@
 import yup from 'yup';
-import RequirementRepository from "../../models/requirement";
+import RequirementRepository from "../../models/requirement.mjs";
 
 async function findByDiscipline(req, res) {
 

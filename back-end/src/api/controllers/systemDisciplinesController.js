@@ -1,5 +1,5 @@
 import yup from 'yup';
-import SystemDisciplinesRepository from "../../models/discipline.js";
+import SystemDisciplinesRepository from "../../models/discipline.mjs";
 
 async function findAll(req, res) {
 
