@@ -1,6 +1,8 @@
 import * as yup from 'yup';
 import DisciplineRepository from "../../models/discipline.mjs";
 import UserRepository from "../../models/user.mjs";
+import moment from "moment";
+import UserCourseDisciplineRepository from "../../models/userCourseDiscipline.mjs";
 
 async function findAll(req, res) {
 
@@ -34,9 +36,10 @@ async function store(req, res) {
     name: yup.string().required(),
     email: yup.string().email().required(),
     password: yup.string().required(),
-    registrationNumber: yup.string().required(),
-    birthDate: yup.date().required(),
+    registration: yup.string().required(),
+    birth_date: yup.date().optional(),
     period: yup.number().optional(),
+    idCourse: yup.string().required()
   });
 
   if (!(await schema.isValid(req.body))) {
@@ -57,16 +60,31 @@ async function store(req, res) {
   const { name, email, password, registration, birth_date, period, idCourse } = req.body;
 
   let disciplines = await DisciplineRepository.findAll({ where: { idCourse: idCourse } });
-
+  
   const data = { name, email, password, registration, birth_date, period };
 
-  // data.password = await bcrypt.hash(data.password, 8); //TODO Esta dando erro na criptação
+  //data.password = await bcrypt.hash(data.password, 8); //TODO Esta dando erro na criptação
 
-  const user = await UserRepository.create(data).then(() => {
+  let dataRelation;
+
+  const user = await UserRepository.create(data).then(async (resp) => {
+    await Promise.all(disciplines.forEach( async discipline => {
+      dataRelation = { idCourse, idUser: resp.id, idDiscipline: discipline.id, status: 3, init_date: moment() };
+
+      await UserCourseDisciplineRepository.create(dataRelation).then(() => {
+
+      }).catch(err => {
+        res.status(400).json({
+          error: err
+        })
+      });
+    }));
+
     res.status(200).json({
       error: false,
       message: "Usuário cadastrado com sucesso!"
     })
+
   })
     .catch(err => {
       res.status(400).json({
@@ -74,17 +92,6 @@ async function store(req, res) {
       })
     })
 
-  let dataRelation = { idCourse, user };
-
- /*  disciplines.forEach(discipline => {
-    await UserCourseDisciplineRepository.create(dataRelation).then(() => {
-       
-     }).catch(err => {
-       res.status(400).json({
-         error: err
-       })
-     });
-  }); */
 }
 
 export default { findAll, store, findById };

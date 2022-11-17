@@ -19,7 +19,6 @@ const User = db.define("user", {
   password: {
     type: DataTypes.STRING(20),
     allowNull: false,
-    unique: true,
   },
   registration: {
     type: DataTypes.STRING(11),
@@ -27,7 +26,7 @@ const User = db.define("user", {
   },
   birth_date: {
     type: DataTypes.DATEONLY,
-    allowNull: false,
+    allowNull: true,
   },
   period: {
     type: DataTypes.INTEGER,

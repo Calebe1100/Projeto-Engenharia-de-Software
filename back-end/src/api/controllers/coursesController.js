@@ -57,7 +57,6 @@ async function store(req, res) {
 
   const data = { name, mandatory_workload, optional_workload, complementary_workload, description };
 
-
   await CoursesRepository.create(data).then((res) => {
 
     return res.status(200).json({

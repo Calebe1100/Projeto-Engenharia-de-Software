@@ -20,7 +20,6 @@ module.exports = {
    password: {
      type: Sequelize.DataTypes.STRING(20),
      allowNull: false,
-     unique: true,
    },
    registration: {
      type: Sequelize.DataTypes.STRING(11),
@@ -28,7 +27,7 @@ module.exports = {
    },
    birth_date: {
      type: Sequelize.DataTypes.DATEONLY,
-     allowNull: false,
+     allowNull: true,
    },
    period: {
      type: Sequelize.DataTypes.INTEGER,
