@@ -44,7 +44,7 @@ async function store(req, res) {
     })
   }
 
-  let disciplineExist = await SystemDisciplinesRepository.findOne({ where: { name: req.body.email } });
+  let disciplineExist = await SystemDisciplinesRepository.findOne({ where: { name: req.body.name } });
   if (disciplineExist) {
     return res.status(400).json({
       error: true,
@@ -57,7 +57,7 @@ async function store(req, res) {
 
   const data = { name, workload, typeDiscipline, description, idCourse };
 
-  await UserDisciplinesRepository.create(data).then((res) => {
+  await SystemDisciplinesRepository.create(data).then((res) => {
     return res.status(200).json({
       error: false,
       message: "Disciplina cadastrada com sucesso"

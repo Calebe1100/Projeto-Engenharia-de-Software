@@ -25,7 +25,8 @@ async function store(req, res) {
     idCourse: yup.string().required(),
     idUser: yup.string().required(),
     status: yup.number().required(),
-    finish_date: yup.date().optional()
+    finish_date: yup.date().optional(),
+    init_date: yup.date().optinal()
   });
 
   if (!(await schema.isValid(req.body))) {
@@ -34,10 +35,8 @@ async function store(req, res) {
       message: "Dados inválidos"
     })
   }
-
+  
   let userExist = await UsersRepository.findOne({ where: { id: req.body.idUser } });
-  let disciplineExist = await DisciplinesRepository.findOne({ where: { id: req.body.idDiscipline } });
-  let courseExist = await CourseRepository.findOne({ where: { id: req.body.idCourse } });
 
   if (!userExist) {
     return res.status(400).json({
@@ -46,12 +45,16 @@ async function store(req, res) {
     })
   }
 
+  let disciplineExist = await DisciplinesRepository.findOne({ where: { id: req.body.idDiscipline } });
+
   if (!disciplineExist) {
     return res.status(400).json({
       error: true,
       message: "Disciplina inválida!"
     })
   }
+
+  let courseExist = await CourseRepository.findOne({ where: { id: req.body.idCourse } });
 
   if (!courseExist) {
     return res.status(400).json({
@@ -60,8 +63,7 @@ async function store(req, res) {
     })
   }
 
-  const { idCourse, idUser, idDiscipline, finish_date, status } = req.body;
-  let init_date = Date.now();
+  const { idCourse, idUser, idDiscipline, finish_date, status, init_date } = req.body;
 
   const data = { status, finish_date, idCourse, idUser, idDiscipline, init_date };
 

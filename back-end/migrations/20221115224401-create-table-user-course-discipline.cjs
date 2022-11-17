@@ -3,9 +3,14 @@
 module.exports = {
   async  up(queryInterface, Sequelize) {
   await queryInterface.createTable('user_course_discipline', {
+    id: {
+      type: Sequelize.DataTypes.UUID,
+      defaultValue: Sequelize.UUIDV4,
+      primaryKey: true,
+    },
     init_date: {
       type: Sequelize.DataTypes.DATEONLY,
-      allowNull: false,
+      allowNull: true,
     },
 
     finish_date: {
