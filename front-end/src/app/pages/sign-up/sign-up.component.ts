@@ -32,12 +32,12 @@ export class SignUpComponent {
         Validators.required,
         Validators.email,
       ]),
-      birthDate: new UntypedFormControl('', [Validators.required]),
+      birthDate: new UntypedFormControl(''),
       registrationNumber: new UntypedFormControl('', [Validators.required]),
       password: new UntypedFormControl('', [Validators.required]),
       passwordConfirm: new UntypedFormControl('', [Validators.required]),
       period: new UntypedFormControl(''),
-      course: new UntypedFormControl(''),
+      course: new UntypedFormControl('', [Validators.required]),
     });
   }
 
