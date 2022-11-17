@@ -1,11 +1,11 @@
 'use strict';
+const { v4: uuidv4 } = require('uuid');
 
 module.exports = {
   async up (queryInterface, Sequelize) {
     return queryInterface.bulkInsert('course', [
-      {
-        id: "6b29fc40-ca47-1067-b31d-00dd010662da", name: "Engenharia da Computação", mandatory_workload: 3400,optional_workload: 480, complementary_workload: 360, description: "Engenharia da computação - Campus Cefet Timóteo - MG"
-      }
+      { id: uuidv4(), name: "Engenharia da Computação", mandatory_workload: 4000,optional_workload: 450, complementary_workload: 450, description: "Engenharia da computação - Campus Cefet Timóteo - MG" },
+      { id: uuidv4(), name: "Engenharia Metalúrgica", mandatory_workload: 3400,optional_workload: 400, complementary_workload: 350, description: "Engenharia Metalúrgica - Campus Cefet Timóteo - MG" }
     ]);
     },
 

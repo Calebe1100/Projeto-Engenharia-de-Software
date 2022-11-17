@@ -1,19 +1,69 @@
 import CourseRepository from "../../models/course.mjs";
 import DisciplinesRepository from "../../models/discipline.mjs";
 import UsersRepository from "../../models/user.mjs";
-import UserDisciplinesCourseRepository from "../../models/userCourseDiscipline.mjs";
+import UserCourseDisciplineRepository from "../../models/userCourseDiscipline.mjs";
 
 import yup from 'yup';
 
 async function findByUser(req, res) {
 
-  UserDisciplinesCourseRepository.findAll({ where: { idUser: req.body.idUser } }).then(data => {
+  UserCourseDisciplineRepository.findAll({ where: { idUser: req.body.idUser } }).then(data => {
     res.send(data);
   })
     .catch(err => {
       res.status(500).send({
         message:
           err.message || "Some error occurred while retrieving tutorials."
+      });
+    })
+}
+
+async function updateById(req, res) {
+
+  let schema = yup.object({
+    id: yup.string().required(),
+    status: yup.number().required(),
+    //finish_date: yup.date().optional(),
+    // init_date: yup.date().optional()
+  });
+
+  if (!(await schema.isValid(req.body))) {
+    return res.status(400).json({
+      error: true,
+      message: "Dados inválidos"
+    })
+  }
+
+  let userCourseDiscipline;
+  await UserCourseDisciplineRepository.findByPk(req.body.id).then(data => {
+    userCourseDiscipline = data;
+  })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Disciplina não encontrada!"
+      });
+    })
+
+  await userCourseDiscipline.update({ status: req.body.status }).then(data => {
+    res.send(data)
+  })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Não foi possível atualizar a disciplina!"
+      });
+    });
+}
+
+async function deleteById(req, res) {
+  await UserCourseDisciplineRepository.deleteById(req.id).then(data => {
+    res.send(data);
+  })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Não foi possível deletar a disciplina!"
       });
     })
 }
@@ -35,7 +85,7 @@ async function store(req, res) {
       message: "Dados inválidos"
     })
   }
-  
+
   let userExist = await UsersRepository.findOne({ where: { id: req.body.idUser } });
 
   if (!userExist) {
@@ -67,7 +117,7 @@ async function store(req, res) {
 
   const data = { status, finish_date, idCourse, idUser, idDiscipline, init_date };
 
-  await UserDisciplinesRepository.create(data).then((res) => {
+  await UserCourseDisciplineRepository.create(data).then((res) => {
     return res.status(200).json({
       error: false,
       message: "Disciplina cadastrada para o usuário com sucesso"
@@ -76,4 +126,4 @@ async function store(req, res) {
 
 }
 
-export default { findByUser, store };
+export default { findByUser, store, updateById, deleteById };

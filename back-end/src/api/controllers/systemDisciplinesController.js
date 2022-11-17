@@ -14,6 +14,42 @@ async function findAll(req, res) {
     })
 }
 
+async function updateById(req, res) {
+
+  let schema = yup.object({
+    id: yup.string().required(),
+    typeDiscipline: yup.number().required()
+  });
+
+  if (!(await schema.isValid(req.body))) {
+    return res.status(400).json({
+      error: true,
+      message: "Dados inválidos"
+    })
+  }
+
+  let discipline;
+  await SystemDisciplinesRepository.findByPk(req.body.id).then(data => {
+    discipline = data;
+  })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Disciplina não encontrada!"
+      });
+    })
+
+  await discipline.update({ typeDiscipline: req.body.typeDiscipline }).then(data => {
+    res.send(data)
+  })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Não foi possível atualizar a disciplina!"
+      });
+    });
+}
+
 async function findByCourseId(req, res) {
 
   SystemDisciplinesRepository.findAll({ where: { idCourse: req.body.idCourse } }).then(data => {
@@ -66,4 +102,4 @@ async function store(req, res) {
 
 }
 
-export default { findAll, store, findByCourseId };
+export default { findAll, store, findByCourseId, updateById };

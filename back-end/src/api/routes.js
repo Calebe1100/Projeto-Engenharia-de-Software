@@ -32,6 +32,7 @@ routes.post("/system-disciplines", midiawareJwt.verifyJWT, systemDisciplines.sto
 /*-----------UserCourseDiscipline-------------*/
 routes.get("/user-disciplines-course", userDisciplinesCourseController.findByUser);
 routes.post("/user-disciplines-course", userDisciplinesCourseController.store);
+routes.put("/user-disciplines-course", userDisciplinesCourseController.updateById);
 
 /*-----------Requirement-------------*/
 routes.get("/requirement-discipline", requirementController.findByDiscipline);
