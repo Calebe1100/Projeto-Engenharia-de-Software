@@ -7,6 +7,7 @@ import {
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { COURSES } from 'src/app/shared/enum/COURSES';
 import { PERIODS } from 'src/app/shared/enum/PERIODS';
+import { GetEnum } from 'src/app/shared/utils/GetEnum';
 import { AuthService } from 'src/services/api/login/auth.service';
 import { UserRequest } from 'src/services/api/login/interface/UserRequest';
 import { RegisterUserService } from 'src/services/api/login/register-user.service';
@@ -45,13 +46,12 @@ export class SignUpComponent {
     const modelUserToRequest = {
       name: this.loginForm.value['name'],
       email: this.loginForm.value['email'],
-      registrationNumber: this.convertPeriodToNumber(
+      registration: this.convertPeriodToNumber(
         this.loginForm.value['registrationNumber']
       ),
       birthDate: this.loginForm.value['birthDate'],
       password: this.loginForm.value['password'],
-      period: this.loginForm.value['period'],
-      course: this.loginForm.value['course'],
+      idCourse: '6b29fc40-ca47-1067-b31d-00dd010662da',
     } as UserRequest;
 
     if (this.loginForm.valid) {

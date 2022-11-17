@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UntypedFormControl } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ColumnMode, SelectionType } from '@swimlane/ngx-datatable';
+import * as moment from 'moment';
 import { DisciplineService } from 'src/services/api/disciplines/discipline.service';
 import {
   Discipline,
@@ -40,11 +41,7 @@ export class DisciplinesRegisterComponent implements OnInit {
   ) {
     this.selected.push(this.filterListDiscipline[2]);
 
-    const date = new Date();
-    const year = date.getFullYear();
-    const month = date.getMonth();
-    const day = date.getDay();
-    this.dateTime = `${day}/${month}/${year}`;
+    this.dateTime = moment().format('MM/DD/YYYY HH:mm');
   }
 
   selected: SystemDiscipline[] = [];

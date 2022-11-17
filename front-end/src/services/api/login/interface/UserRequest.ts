@@ -2,8 +2,8 @@ export interface UserRequest {
   name: string;
   email: string;
   password: string;
-  registrationNumber: string;
+  registration: string;
   birthDate: string;
-  course?: string;
+  idCourse: string;
   period?: string;
 }
