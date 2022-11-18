@@ -3,11 +3,13 @@ import DisciplinesRepository from "../../models/discipline.mjs";
 import UsersRepository from "../../models/user.mjs";
 import UserCourseDisciplineRepository from "../../models/userCourseDiscipline.mjs";
 
+import Discipline from "../../models/discipline.mjs";
+
 import yup from 'yup';
 
-async function findByUser(req, res) {
+async function findByUser(req, res ) {
 
-  UserCourseDisciplineRepository.findAll({ where: { idUser: req.body.idUser } }).then(data => {
+  UserCourseDisciplineRepository.findAll({ where: { idUser: req.query.idUser }, include: Discipline } ).then(data => {
     res.send(data);
   })
     .catch(err => {
@@ -18,7 +20,7 @@ async function findByUser(req, res) {
     })
 }
 
-async function updateById(req, res) {
+async function updateStatusByIds(req, res) {
 
   let schema = yup.object({
     status: yup.number().required(),
@@ -32,18 +34,7 @@ async function updateById(req, res) {
     })
   }
   
-  await Promise.all(req.body.forEach(async element => {
-    let userCourseDiscipline;
-    await UserCourseDisciplineRepository.findByPk(element.id).then(data => {
-      userCourseDiscipline = data;
-    })
-      .catch(err => {
-        res.status(500).send({
-          message:
-            err.message || "Disciplina não encontrada!"
-        });
-      })
-      
+  await Promise.all(req.body.forEach(async element => {      
       await UserCourseDisciplineRepository.update({ status: element.status }).then(data => {
         res.send(data)
       })
@@ -127,4 +118,4 @@ async function store(req, res) {
 
 }
 
-export default { findByUser, store, updateById, deleteById };
+export default { findByUser, store, updateStatusByIds, deleteById };

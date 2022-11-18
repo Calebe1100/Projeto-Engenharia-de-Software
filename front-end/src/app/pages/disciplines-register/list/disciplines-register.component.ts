@@ -10,6 +10,7 @@ import {
   Discipline,
   DisciplineStatus,
 } from 'src/services/api/disciplines/interface/Discipline';
+import { ListDisciplineResponse } from 'src/services/api/disciplines/interface/ListDisciplineResponse';
 import { UpdateDisciplineRequest } from 'src/services/api/disciplines/interface/UpdateDisciplineRequest';
 import { AuthService } from 'src/services/api/login/auth.service';
 import { SystemDiscipline } from 'src/services/api/system-disciplines/interface/SystemDiscipline';
@@ -59,11 +60,35 @@ export class DisciplinesRegisterComponent implements OnInit {
     this.disciplineService
       .listUserDiscipline(idUser.toString())
       .subscribe((resp) => {
-        this.listDiscipline = resp.list as SystemDiscipline[];
+        this.listDiscipline = (resp.list as ListDisciplineResponse[]).map(
+          (item) => {
+            return {
+              description: item.discipline.description,
+              id: item.discipline.id,
+              idCourse: item.discipline.idCourse,
+              idCourseDiscipline: item.id,
+              name: item.discipline.name,
+              status: this.getStatus(item.status),
+              typeDiscipline: item.discipline.typeDiscipline,
+              workload: item.discipline.workload,
+            } as unknown as SystemDiscipline;
+          }
+        );
         this.filterListDiscipline = this.listDiscipline;
 
         this.setStatus();
       });
+  }
+
+  getStatus(status: number): string {
+    if (status === DisciplineStatus.completed) {
+      return 'Completed';
+    } else if (status === DisciplineStatus.notStarted) {
+      return 'Pendente';
+    } else if (status === DisciplineStatus.studying) {
+      return 'Cursando';
+    }
+    return 'Pendente';
   }
 
   setStatus() {
@@ -71,12 +96,8 @@ export class DisciplinesRegisterComponent implements OnInit {
       (discipline: SystemDiscipline) => {
         return {
           ...discipline,
-          status: 'Não iniciado',
           descriptionDiscipline:
             discipline.typeDiscipline === 1 ? 'Obrigatória' : 'Optativa',
-          idCourseDiscipline: this.listUserDiscipline.find(
-            (d) => d.idDiscipline === discipline.id
-          )?.id,
         };
       }
     ) as unknown as SystemDiscipline[];
