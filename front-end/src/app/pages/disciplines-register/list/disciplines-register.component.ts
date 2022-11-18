@@ -56,20 +56,14 @@ export class DisciplinesRegisterComponent implements OnInit {
   ngOnInit(): void {
     const idUser = this.cookieService.getCookie('id');
 
-    forkJoin([
-      this.disciplineService.listUserDiscipline(idUser.toString()),
-      this.systemDisciplinesService.listSystemDisciplines(),
-    ]).subscribe((results) => {
-      this.listUserDiscipline = (results[0].list as Discipline[]);
-      this.listDiscipline = (results[1].list as SystemDiscipline[]).filter(
-        (discipline) =>
-        this.listUserDiscipline.map(
-            (d) => discipline.id == d.idDiscipline
-          )
-      );
-      this.setStatus();
-      this.filterListDiscipline = this.listDiscipline;
-    });
+    this.disciplineService
+      .listUserDiscipline(idUser.toString())
+      .subscribe((resp) => {
+        this.listDiscipline = resp.list as SystemDiscipline[];
+        this.filterListDiscipline = this.listDiscipline;
+
+        this.setStatus();
+      });
   }
 
   setStatus() {
@@ -80,8 +74,9 @@ export class DisciplinesRegisterComponent implements OnInit {
           status: 'Não iniciado',
           descriptionDiscipline:
             discipline.typeDiscipline === 1 ? 'Obrigatória' : 'Optativa',
-            idCourseDiscipline: this.listUserDiscipline.find(d => d.idDiscipline === discipline.id)?.id
-          
+          idCourseDiscipline: this.listUserDiscipline.find(
+            (d) => d.idDiscipline === discipline.id
+          )?.id,
         };
       }
     ) as unknown as SystemDiscipline[];
@@ -161,7 +156,7 @@ export class DisciplinesRegisterComponent implements OnInit {
     return this.listDisciplineSelected.map((discipline) => {
       return {
         status: status,
-        id: discipline.idCourseDiscipline
+        id: discipline.idCourseDiscipline,
       } as UpdateDisciplineRequest;
     });
   }
