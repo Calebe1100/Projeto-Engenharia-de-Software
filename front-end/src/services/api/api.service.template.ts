@@ -7,7 +7,11 @@ import {
 import { map, Observable } from 'rxjs';
 import { ErrorApiTemplate } from './ErrorApiTemplate';
 
-type Params = HttpParams;
+interface Param {
+	[k: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
+}
+
+type Params = HttpParams | Param;
 
 export class ApiServiceTemplate {
   static readonly prefixApiLocal = 'http://localhost:3000';

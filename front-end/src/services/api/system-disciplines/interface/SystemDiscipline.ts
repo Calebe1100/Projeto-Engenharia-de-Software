@@ -8,6 +8,7 @@ export interface SystemDiscipline {
   workload: number;
   status: DisciplineStatus;
   typeDiscipline: TypeDiscipline;
+  idCourseDiscipline: string;
 }
 
 export enum TypeDiscipline {

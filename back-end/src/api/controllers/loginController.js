@@ -25,6 +25,7 @@ async function login(req, res) {
         id :userExist.id,
         name: userExist.name,
         email: userExist.email,
+        
       },
       token: jwt.sign(
         {id: userExist._id}, 

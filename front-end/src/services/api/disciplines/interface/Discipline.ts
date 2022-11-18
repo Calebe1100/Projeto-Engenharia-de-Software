@@ -1,4 +1,5 @@
 export interface Discipline {
+  id: string;
   userId: number;
   idDiscipline: string;
   idCourse: number;

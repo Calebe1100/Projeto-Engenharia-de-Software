@@ -21,39 +21,41 @@ async function findByUser(req, res) {
 async function updateById(req, res) {
 
   let schema = yup.object({
-    id: yup.string().required(),
     status: yup.number().required(),
-    //finish_date: yup.date().optional(),
-    // init_date: yup.date().optional()
+    id: yup.string().required()
   });
 
-  if (!(await schema.isValid(req.body))) {
+  if (!(await schema.isValid(req.body[0]))) {
     return res.status(400).json({
       error: true,
       message: "Dados inválidos"
     })
   }
-
-  let userCourseDiscipline;
-  await UserCourseDisciplineRepository.findByPk(req.body.id).then(data => {
-    userCourseDiscipline = data;
-  })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Disciplina não encontrada!"
-      });
+  
+  await Promise.all(req.body.forEach(async element => {
+    let userCourseDiscipline;
+    await UserCourseDisciplineRepository.findByPk(element.id).then(data => {
+      userCourseDiscipline = data;
     })
+      .catch(err => {
+        res.status(500).send({
+          message:
+            err.message || "Disciplina não encontrada!"
+        });
+      })
+    }));
+    
+      await userCourseDiscipline.update({ status: element.status }).then(data => {
+        res.send(data)
+      })
+        .catch(err => {
+          res.status(500).send({
+            message:
+              err.message || "Não foi possível atualizar a disciplina!"
+          });
+        });
 
-  await userCourseDiscipline.update({ status: req.body.status }).then(data => {
-    res.send(data)
-  })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Não foi possível atualizar a disciplina!"
-      });
-    });
+
 }
 
 async function deleteById(req, res) {

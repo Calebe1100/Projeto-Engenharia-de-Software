@@ -2,15 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { UntypedFormControl } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ColumnMode, SelectionType } from '@swimlane/ngx-datatable';
+import { fork } from 'child_process';
 import * as moment from 'moment';
+import { forkJoin } from 'rxjs';
 import { DisciplineService } from 'src/services/api/disciplines/discipline.service';
 import {
   Discipline,
   DisciplineStatus,
 } from 'src/services/api/disciplines/interface/Discipline';
+import { UpdateDisciplineRequest } from 'src/services/api/disciplines/interface/UpdateDisciplineRequest';
 import { AuthService } from 'src/services/api/login/auth.service';
 import { SystemDiscipline } from 'src/services/api/system-disciplines/interface/SystemDiscipline';
 import { SystemDisciplinesService } from 'src/services/api/system-disciplines/system-discipline.service';
+import { CookieService } from 'src/services/shared/cookieService';
 import { DialogDisciplinesComponent } from '../../dialog/dialog-disciplines/dialog-disciplines.component';
 
 @Component({
@@ -28,6 +32,8 @@ export class DisciplinesRegisterComponent implements OnInit {
 
   tablestyle = 'bootstrap';
 
+  listUserDiscipline: Discipline[] = [];
+
   ColumnMode = ColumnMode;
   SelectionType = SelectionType;
 
@@ -37,7 +43,8 @@ export class DisciplinesRegisterComponent implements OnInit {
     public dialog: MatDialog,
     private readonly systemDisciplinesService: SystemDisciplinesService,
     private readonly disciplineService: DisciplineService,
-    public readonly authService: AuthService
+    public readonly authService: AuthService,
+    private readonly cookieService: CookieService
   ) {
     this.selected.push(this.filterListDiscipline[2]);
 
@@ -47,17 +54,37 @@ export class DisciplinesRegisterComponent implements OnInit {
   selected: SystemDiscipline[] = [];
 
   ngOnInit(): void {
-    this.systemDisciplinesService.listSystemDisciplines().subscribe((resp) => {
-      this.listDiscipline = resp.list.map((discipline: SystemDiscipline) => {
+    const idUser = this.cookieService.getCookie('id');
+
+    forkJoin([
+      this.disciplineService.listUserDiscipline(idUser.toString()),
+      this.systemDisciplinesService.listSystemDisciplines(),
+    ]).subscribe((results) => {
+      this.listUserDiscipline = (results[0].list as Discipline[]);
+      this.listDiscipline = (results[1].list as SystemDiscipline[]).filter(
+        (discipline) =>
+        this.listUserDiscipline.map(
+            (d) => discipline.id == d.idDiscipline
+          )
+      );
+      this.setStatus();
+      this.filterListDiscipline = this.listDiscipline;
+    });
+  }
+
+  setStatus() {
+    this.listDiscipline = this.listDiscipline.map(
+      (discipline: SystemDiscipline) => {
         return {
           ...discipline,
           status: 'Não iniciado',
           descriptionDiscipline:
             discipline.typeDiscipline === 1 ? 'Obrigatória' : 'Optativa',
+            idCourseDiscipline: this.listUserDiscipline.find(d => d.idDiscipline === discipline.id)?.id
+          
         };
-      }) as SystemDiscipline[];
-      this.filterListDiscipline = this.listDiscipline;
-    });
+      }
+    ) as unknown as SystemDiscipline[];
   }
   get displayDisciplinesList(): boolean {
     return true;
@@ -116,7 +143,7 @@ export class DisciplinesRegisterComponent implements OnInit {
 
   emitCompleted() {
     this.disciplineService
-      .postUserDisciplines(
+      .updateDisciplinesStatus(
         this.formattedListToRequest(DisciplineStatus.completed)
       )
       .subscribe(() => window.location.reload);
@@ -124,21 +151,18 @@ export class DisciplinesRegisterComponent implements OnInit {
 
   emitStudying() {
     this.disciplineService
-      .postUserDisciplines(
+      .updateDisciplinesStatus(
         this.formattedListToRequest(DisciplineStatus.studying)
       )
       .subscribe(() => window.location.reload);
   }
 
-  formattedListToRequest(status: DisciplineStatus): Discipline[] {
+  formattedListToRequest(status: DisciplineStatus): UpdateDisciplineRequest[] {
     return this.listDisciplineSelected.map((discipline) => {
       return {
-        idCourse: 1,
-        finishDate: this.dateTime,
-        userId: 1,
-        idDiscipline: discipline.id,
         status: status,
-      } as Discipline;
+        id: discipline.idCourseDiscipline
+      } as UpdateDisciplineRequest;
     });
   }
 }
