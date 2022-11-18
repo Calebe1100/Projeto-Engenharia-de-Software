@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ApiServiceTemplate } from '../api.service.template';
+import { CreateDisciplineRequest } from './interface/CreateDisciplineRequest';
 import { Discipline } from './interface/Discipline';
 import { DisciplineRequest } from './interface/DisciplineRequest';
 import { UpdateDisciplineRequest } from './interface/UpdateDisciplineRequest';
@@ -23,8 +24,8 @@ export class DisciplineService extends ApiServiceTemplate {
     return this.list(endPoint, { idUser: param });
   }
 
-  postUserDisciplines(body: Discipline[]) {
-    const endPoint = `${DisciplineService.prefixApiLocal}/disciplines`;
+  postUserDiscipline(body: CreateDisciplineRequest) {
+    const endPoint = `${DisciplineService.prefixApiLocal}/user-disciplines-course`;
     return this.post(endPoint, body);
   }
 }

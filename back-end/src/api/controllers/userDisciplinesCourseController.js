@@ -43,19 +43,20 @@ async function updateById(req, res) {
             err.message || "Disciplina não encontrada!"
         });
       })
-    }));
-    
-      await userCourseDiscipline.update({ status: element.status }).then(data => {
+      
+      await UserCourseDisciplineRepository.update({ status: element.status }).then(data => {
         res.send(data)
       })
-        .catch(err => {
-          res.status(500).send({
-            message:
-              err.message || "Não foi possível atualizar a disciplina!"
-          });
+      .catch(err => {
+        res.status(500).send({
+          message:
+          err.message || "Não foi possível atualizar a disciplina!"
         });
-
-
+      });
+      
+    }));
+      
+      
 }
 
 async function deleteById(req, res) {
@@ -77,8 +78,6 @@ async function store(req, res) {
     idCourse: yup.string().required(),
     idUser: yup.string().required(),
     status: yup.number().required(),
-    finish_date: yup.date().optional(),
-    init_date: yup.date().optinal()
   });
 
   if (!(await schema.isValid(req.body))) {
@@ -119,7 +118,7 @@ async function store(req, res) {
 
   const data = { status, finish_date, idCourse, idUser, idDiscipline, init_date };
 
-  await UserCourseDisciplineRepository.create(data).then((res) => {
+  await UserCourseDisciplineRepository.create(data).then(() => {
     return res.status(200).json({
       error: false,
       message: "Disciplina cadastrada para o usuário com sucesso"
