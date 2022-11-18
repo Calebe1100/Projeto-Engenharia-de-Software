@@ -34,7 +34,17 @@ async function updateStatusByIds(req, res) {
     })
   }
   
-  await Promise.all(req.body.forEach(async element => {      
+  await Promise.all(req.body.forEach(async element => {
+    await UserCourseDisciplineRepository.findByPk(element.id).then(data => {
+      userCourseDiscipline = data;
+    })
+      .catch(err => {
+        res.status(500).send({
+          message:
+            err.message || "Erro ao atualizar disciplina!"
+        });
+      })
+      
       await UserCourseDisciplineRepository.update({ status: element.status }).then(data => {
         res.send(data)
       })
