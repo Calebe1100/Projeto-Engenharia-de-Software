@@ -35,17 +35,8 @@ async function updateStatusByIds(req, res) {
   }
   
   await Promise.all(req.body.forEach(async element => {
-    await UserCourseDisciplineRepository.findByPk(element.id).then(data => {
-      userCourseDiscipline = data;
-    })
-      .catch(err => {
-        res.status(500).send({
-          message:
-            err.message || "Erro ao atualizar disciplina!"
-        });
-      })
-      
-      await UserCourseDisciplineRepository.update({ status: element.status }).then(data => {
+    await UserCourseDisciplineRepository.findOne({ where: { id: element.id } }).then(async data => {
+      await data.update({ status: element.status }).then(data => {
         res.send(data)
       })
       .catch(err => {
@@ -53,10 +44,9 @@ async function updateStatusByIds(req, res) {
           message:
           err.message || "Não foi possível atualizar a disciplina!"
         });
-      });
-      
-    }));
-      
+      })}
+      )}
+      ));
       
 }
 
