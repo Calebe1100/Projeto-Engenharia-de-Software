@@ -4,6 +4,7 @@ import UsersRepository from "../../models/user.mjs";
 import UserCourseDisciplineRepository from "../../models/userCourseDiscipline.mjs";
 
 import yup from 'yup';
+import discipline from "../../models/discipline.mjs";
 
 async function findByUser(req, res) {
 
@@ -31,20 +32,10 @@ async function updateById(req, res) {
       message: "Dados inválidos"
     })
   }
-  
+
   await Promise.all(req.body.forEach(async element => {
-    let userCourseDiscipline;
-    await UserCourseDisciplineRepository.findByPk(element.id).then(data => {
-      userCourseDiscipline = data;
-    })
-      .catch(err => {
-        res.status(500).send({
-          message:
-            err.message || "Disciplina não encontrada!"
-        });
-      })
-      
-      await UserCourseDisciplineRepository.update({ status: element.status }).then(data => {
+    await UserCourseDisciplineRepository.findOne({ where: { id: element.id } }).then(async data => {
+      await data.update({ status: element.status }).then(data => {
         res.send(data)
       })
       .catch(err => {
@@ -52,11 +43,8 @@ async function updateById(req, res) {
           message:
           err.message || "Não foi possível atualizar a disciplina!"
         });
-      });
-      
-    }));
-      
-      
+
+
 }
 
 async function deleteById(req, res) {
