@@ -17,6 +17,7 @@ import { RegisterUserService } from './register-user.service';
 })
 export class AuthService {
   public userAuthentication: Observable<boolean> = of(false);
+  public initAuthentication = false;
 
   constructor(
     private readonly router: Router,
@@ -36,6 +37,7 @@ export class AuthService {
         this.setUserCredentials(resp.body as UserLoginResponse);
 
         this.userAuthentication = of(true);
+        this.initAuthentication = true;
         this.router.navigate(['/disciplines-register']);
       },
       (error: HttpErrorResponse) => {
@@ -52,6 +54,7 @@ export class AuthService {
 
     this.cookieService.setCookie('id', userModel.user.id, 4000, 'user/');
     this.cookieService.setCookie('email', userModel.user.email, 4000, 'user/');
+    this.cookieService.setCookie('name', userModel.user.name, 4000, 'user/');
   }
 
   async register(user: UserRequest) {

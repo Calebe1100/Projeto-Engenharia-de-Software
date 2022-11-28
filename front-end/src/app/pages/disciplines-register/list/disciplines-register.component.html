@@ -52,7 +52,7 @@
                             <ng-template let-column="descriptionDiscipline">
                             </ng-template>
                             <ng-template let-value="value" ngx-datatable-cell-template let-rowIndex="rowIndex">
-                                <span fxLayoutAlign="center center">{{value}}</span>
+                                <span fxLayoutAlign="center center">{{value ?? 'Obrigatória'}}</span>
                             </ng-template>
                         </ngx-datatable-column>
 

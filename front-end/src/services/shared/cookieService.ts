@@ -25,6 +25,10 @@ export class CookieService {
     this.setCookie(name, '', -1);
   }
 
+  public clearAll() {
+    document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
+  }
+
   public setCookie(
     name: string,
     value: string,

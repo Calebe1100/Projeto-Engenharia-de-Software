@@ -14,7 +14,7 @@
     </button>
     <button *ngIf="(authService.userAuthentication|async)" mat-icon-button fxLayoutAlign="start center" color="primary"
       class="button-configuration" [routerLink]="['../disciplines-register']"
-      (click)="authService.setHiddenAuthentication()">
+      (click)="setLogout()">
       <mat-icon>logout</mat-icon>
       <span class="ml-1">Sair</span>
     </button>

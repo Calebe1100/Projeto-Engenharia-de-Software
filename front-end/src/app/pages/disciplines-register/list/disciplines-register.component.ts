@@ -18,6 +18,7 @@ import { SystemDisciplinesService } from 'src/services/api/system-disciplines/sy
 import { CookieService } from 'src/services/shared/cookieService';
 import { DialogDisciplinesComponent } from '../../dialog/dialog-disciplines/dialog-disciplines.component';
 import { DialogViewDisciplineComponent } from '../../dialog/dialog-view-discipline/dialog-view-discipline.component';
+import { DialogWelcomeComponent } from '../../dialog/dialog-welcome/dialog-welcome.component';
 
 @Component({
   selector: 'app-disciplines-register',
@@ -58,27 +59,49 @@ export class DisciplinesRegisterComponent implements OnInit {
   ngOnInit(): void {
     const idUser = this.cookieService.getCookie('id');
 
-    this.disciplineService
-      .listUserDiscipline(idUser.toString())
-      .subscribe((resp) => {
-        this.listDiscipline = (resp.list as ListDisciplineResponse[]).map(
+    idUser ?
+      this.disciplineService
+        .listUserDiscipline(idUser.toString())!
+        .subscribe((resp) => {
+          this.listDiscipline = (resp.list as ListDisciplineResponse[]).map(
+            (item) => {
+              return {
+                description: item.discipline.description,
+                id: item.discipline.id,
+                idCourse: item.discipline.idCourse,
+                idCourseDiscipline: item.id,
+                name: item.discipline.name,
+                status: this.getStatus(item.status),
+                typeDiscipline: item.discipline.typeDiscipline,
+                workload: item.discipline.workload,
+              } as unknown as SystemDiscipline;
+            }
+          );
+          this.filterListDiscipline = this.listDiscipline;
+  
+          this.setStatus();
+  
+          this.authService.initAuthentication
+            ? this.dialog.open(DialogWelcomeComponent)
+            : null;
+        }) :
+      this.systemDisciplinesService.listSystemDisciplines().subscribe(resp => {
+        this.listDiscipline = (resp.list as SystemDiscipline[]).map(
           (item) => {
             return {
-              description: item.discipline.description,
-              id: item.discipline.id,
-              idCourse: item.discipline.idCourse,
+              description: item.description,
+              id: item.id,
+              idCourse: item.idCourse,
               idCourseDiscipline: item.id,
-              name: item.discipline.name,
+              name: item.name,
               status: this.getStatus(item.status),
-              typeDiscipline: item.discipline.typeDiscipline,
-              workload: item.discipline.workload,
+              typeDiscipline: item.typeDiscipline,
+              workload: item.workload,
             } as unknown as SystemDiscipline;
           }
         );
-        this.filterListDiscipline = this.listDiscipline;
 
-        this.setStatus();
-      });
+      })
   }
 
   getStatus(status: number): string {
