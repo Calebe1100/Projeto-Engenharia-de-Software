@@ -17,6 +17,7 @@ import { SystemDiscipline } from 'src/services/api/system-disciplines/interface/
 import { SystemDisciplinesService } from 'src/services/api/system-disciplines/system-discipline.service';
 import { CookieService } from 'src/services/shared/cookieService';
 import { DialogDisciplinesComponent } from '../../dialog/dialog-disciplines/dialog-disciplines.component';
+import { DialogViewDisciplineComponent } from '../../dialog/dialog-view-discipline/dialog-view-discipline.component';
 
 @Component({
   selector: 'app-disciplines-register',
@@ -180,5 +181,13 @@ export class DisciplinesRegisterComponent implements OnInit {
         id: discipline.idCourseDiscipline,
       } as UpdateDisciplineRequest;
     });
+  }
+
+  onRowClicked(event: any) {
+    if (event.type == 'click') {
+      let dialogRef = this.dialog.open(DialogViewDisciplineComponent);
+      dialogRef.componentInstance.disciplineSelected =
+        event.row as SystemDiscipline;
+    }
   }
 }

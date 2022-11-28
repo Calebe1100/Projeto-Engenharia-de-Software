@@ -1,12 +1,18 @@
 mat-card {
   min-width: max-content;
+  padding: 0;
+}
+
+  .datatable-row-wrapper {
+  cursor: pointer;
 }
 .scrolling {
   height: calc(100vh - 110px);
 }
 
 .ngx-datatable.material.scroll-vertical {
-  max-height: 20rem;
+  max-height: 50rem;
+  min-height: 20rem;
 }
 
 .buttons-group {

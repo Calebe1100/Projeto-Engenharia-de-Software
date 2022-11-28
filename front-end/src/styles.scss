@@ -34,6 +34,10 @@ $cefet_road_map-theme: mat.define-light-theme(
 // that you are using.
 @include mat.all-component-themes($cefet_road_map-theme);
 
+@import "~@swimlane/ngx-datatable/index.css";
+@import "~@swimlane/ngx-datatable/themes/material.scss";
+@import "~@swimlane/ngx-datatable/assets/icons.css";
+
 /* You can add global styles to this file, and also import other style files */
 body {
   //background: linear-gradient(90deg, #3F2B96 0%, #A8C0FF 100%);
@@ -46,4 +50,8 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.datatable-row-wrapper {
+  cursor: pointer;
 }
