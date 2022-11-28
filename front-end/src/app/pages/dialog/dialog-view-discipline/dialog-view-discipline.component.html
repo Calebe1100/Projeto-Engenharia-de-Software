@@ -7,26 +7,11 @@
       [nodes]="sampleNodes"
       >
 
-      <ng-template #defsTemplate>
-        <svg:marker id="arrow" viewBox="0 -5 10 10" refX="8" refY="0" markerWidth="4" markerHeight="4" orient="auto">
-            <svg:path d="M0,-5L10,0L0,5" class="arrow-head" />
-        </svg:marker>
-    </ng-template>
 
     <ng-template #nodeTemplate let-node>
         <svg:g class="node">
-            <svg:rect [attr.width]="node.width" [attr.height]="node.height" [attr.fill]="node.options.color" />
-            <svg:text alignment-baseline="central" [attr.x]="10" [attr.y]="node.height / 2">{{node.label}}</svg:text>
-        </svg:g>
-    </ng-template>
-
-    <ng-template #linkTemplate let-link>
-        <svg:g class="edge">
-            <svg:path
-                class="line"
-                stroke-width="2"
-                marker-end="url(#arrow)" >
-            </svg:path>
+            <svg:rect [attr.width]="180" [attr.height]="30" [attr.fill]="'rgb(147, 180, 218)'" />
+            <svg:text alignment-baseline="central" [attr.x]="20" [attr.y]="10">{{node.label}}</svg:text>
         </svg:g>
     </ng-template>
 
