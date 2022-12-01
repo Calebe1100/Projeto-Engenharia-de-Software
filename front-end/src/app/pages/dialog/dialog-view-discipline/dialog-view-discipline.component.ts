@@ -20,6 +20,7 @@ export class DialogViewDisciplineComponent implements OnInit {
     {
       id: '1',
       label: 'Cálculo 2',
+      coRequisitos: ["1", '2', '3'],
       rank: 'first',
     },
     {
