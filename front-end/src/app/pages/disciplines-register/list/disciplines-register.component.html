@@ -71,8 +71,8 @@
                 </div>
             </mat-card>
             <div fxLayoutAlign="end center" fxLayoutGap="10px" *ngIf="(authService.userAuthentication|async)" class="buttons-group">
-                <button mat-button style="background-color: #2fd48a;" (click)="emitStudying()">Concluída</button>
-                <button mat-button style="background-color: #c97924;" (click)="emitCompleted()">Cursando</button>
+                <button mat-button style="background-color: #2fd48a;" (click)="emitCompleted()">Concluída</button>
+                <button mat-button style="background-color: #c97924;" (click)="emitStudying()">Cursando</button>
                 <button mat-button style="background-color: #D9D9D9;" (click)="openDialog()">Cadastrar
                     disciplina</button>
             </div>
