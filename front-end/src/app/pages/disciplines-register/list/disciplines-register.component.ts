@@ -101,7 +101,6 @@ export class DisciplinesRegisterComponent implements OnInit {
                   description: item.description,
                   id: item.id,
                   idCourse: item.idCourse,
-                  nameCourse: item.course.name,
                   idCourseDiscipline: item.id,
                   name: item.name,
                   status: this.getStatus(item.status),
