@@ -67,56 +67,56 @@ export class DisciplinesRegisterComponent implements OnInit {
 
     idUser
       ? this.disciplineService
-          .listUserDiscipline(idUser.toString())!
-          .subscribe((resp) => {
-            this.listDiscipline = (resp.list as ListDisciplineResponse[]).map(
-              (item) => {
-                return {
-                  description: item.discipline.description,
-                  id: item.discipline.id,
-                  idCourse: item.discipline.idCourse,
-                  idCourseDiscipline: item.id,
-                  name: item.discipline.name,
-                  status: this.getStatus(item.status),
-                  typeDiscipline: item.discipline.typeDiscipline,
-                  workload: item.discipline.workload,
-                } as unknown as SystemDiscipline;
-              }
-            );
+        .listUserDiscipline(idUser.toString())!
+        .subscribe((resp) => {
+          this.listDiscipline = (resp.list as ListDisciplineResponse[]).map(
+            (item) => {
+              return {
+                description: item.discipline.description,
+                id: item.discipline.id,
+                idCourse: item.discipline.idCourse,
+                idCourseDiscipline: item.id,
+                name: item.discipline.name,
+                status: this.getStatus(item.status),
+                typeDiscipline: item.discipline.typeDiscipline,
+                workload: item.discipline.workload,
+              } as unknown as SystemDiscipline;
+            }
+          );
 
-            this.setStatus();
+          this.setStatus();
 
-            this.filterListDiscipline = this.listDiscipline;
-            this.authService.initAuthentication
-              ? this.dialog.open(DialogWelcomeComponent)
-              : null;
-          })
+          this.filterListDiscipline = this.listDiscipline;
+          this.authService.initAuthentication
+            ? this.dialog.open(DialogWelcomeComponent)
+            : null;
+        })
       : this.systemDisciplinesService
-          .listSystemDisciplines()
-          .subscribe((resp) => {
-            this.listDiscipline = (resp.list as SystemDiscipline[]).map(
-              (item) => {
-                return {
-                  description: item.description,
-                  id: item.id,
-                  idCourse: item.idCourse,
-                  idCourseDiscipline: item.id,
-                  name: item.name,
-                  status: this.getStatus(item.status),
-                  typeDiscipline: item.typeDiscipline,
-                  workload: item.workload,
-                } as unknown as SystemDiscipline;
-              }
-            );
+        .listSystemDisciplines()
+        .subscribe((resp) => {
+          this.listDiscipline = (resp.list as SystemDiscipline[]).map(
+            (item) => {
+              return {
+                description: item.description,
+                id: item.id,
+                idCourse: item.idCourse,
+                idCourseDiscipline: item.id,
+                name: item.name,
+                status: this.getStatus(item.status),
+                typeDiscipline: item.typeDiscipline,
+                workload: item.workload,
+              } as unknown as SystemDiscipline;
+            }
+          );
 
-            this.setStatus();
-            this.filterListDiscipline = this.listDiscipline;
-          });
+          this.setStatus();
+          this.filterListDiscipline = this.listDiscipline;
+        });
   }
 
   getStatus(status: number): string {
     if (status === DisciplineStatus.completed) {
-      return 'Completed';
+      return 'Concluído';
     } else if (status === DisciplineStatus.notStarted) {
       return 'Pendente';
     } else if (status === DisciplineStatus.studying) {
@@ -192,7 +192,7 @@ export class DisciplinesRegisterComponent implements OnInit {
       .updateDisciplinesStatus(
         this.formattedListToRequest(DisciplineStatus.completed)
       )
-      .subscribe(() => window.location.reload);
+      .subscribe(() => window.location.reload());
   }
 
   emitStudying() {
@@ -200,7 +200,7 @@ export class DisciplinesRegisterComponent implements OnInit {
       .updateDisciplinesStatus(
         this.formattedListToRequest(DisciplineStatus.studying)
       )
-      .subscribe(() => window.location.reload);
+      .subscribe(() => window.location.reload());
   }
 
   formattedListToRequest(status: DisciplineStatus): UpdateDisciplineRequest[] {

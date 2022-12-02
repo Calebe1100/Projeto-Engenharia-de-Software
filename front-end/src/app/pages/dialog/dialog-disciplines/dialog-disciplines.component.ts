@@ -76,7 +76,7 @@ export class DialogDisciplinesComponent implements OnInit {
     }
   }
   getStatusId(status: string): DisciplineStatus {
-    if (status === 'Completed') {
+    if (status === 'Concluído') {
       return DisciplineStatus.completed;
     } else if (status === 'Pendente') {
       return DisciplineStatus.notStarted;
