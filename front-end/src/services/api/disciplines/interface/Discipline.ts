@@ -1,9 +1,12 @@
+import { Course } from '../../course/interface/Course';
+
 export interface Discipline {
   id: string;
   userId: number;
   idDiscipline: string;
   idCourse: number;
-  nameCourse:string;
+  nameCourse: string;
+  course: Course;
   initDate: string;
   finishDate: string;
   workload: number;
