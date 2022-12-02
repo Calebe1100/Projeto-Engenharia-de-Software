@@ -3,13 +3,11 @@ import DisciplinesRepository from "../../models/discipline.mjs";
 import UsersRepository from "../../models/user.mjs";
 import UserCourseDisciplineRepository from "../../models/userCourseDiscipline.mjs";
 
-import Discipline from "../../models/discipline.mjs";
-
 import yup from 'yup';
 
-async function findByUser(req, res ) {
+async function findByUser(req, res) {
 
-  UserCourseDisciplineRepository.findAll({ where: { idUser: req.query.idUser }, include: Discipline } ).then(data => {
+  UserCourseDisciplineRepository.findAll({ where: { idUser: req.query.idUser }, include: [{ model: DisciplinesRepository }, { model: CourseRepository }] }).then(data => {
     res.send(data);
   })
     .catch(err => {
@@ -33,21 +31,23 @@ async function updateStatusByIds(req, res) {
       message: "Dados inválidos"
     })
   }
-  
+
   await Promise.all(req.body.forEach(async element => {
     await UserCourseDisciplineRepository.findOne({ where: { id: element.id } }).then(async data => {
       await data.update({ status: element.status }).then(data => {
         res.send(data)
       })
-      .catch(err => {
-        res.status(500).send({
-          message:
-          err.message || "Não foi possível atualizar a disciplina!"
-        });
-      })}
-      )}
-      ));
-      
+        .catch(err => {
+          res.status(500).send({
+            message:
+              err.message || "Não foi possível atualizar a disciplina!"
+          });
+        })
+    }
+    )
+  }
+  ));
+
 }
 
 async function deleteById(req, res) {
