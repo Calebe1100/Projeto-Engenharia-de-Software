@@ -3,6 +3,7 @@ export interface Discipline {
   userId: number;
   idDiscipline: string;
   idCourse: number;
+  nameCourse:string;
   initDate: string;
   finishDate: string;
   workload: number;

@@ -67,6 +67,19 @@
                                 <span fxLayoutAlign="center center">{{value}}</span>
                             </ng-template>
                         </ngx-datatable-column>
+
+                        <ngx-datatable-column *ngIf="(authService.userAuthentication|async)" name="nameCourse"
+                        [flexGrow]="1.5">
+                        <ng-template ngx-datatable-header-template>
+                            <span fxLayoutAlign="center center">Curso</span>
+                        </ng-template>
+                        <ng-template let-column="nameCourse">
+                        </ng-template>
+                        <ng-template let-value="nameCourse" ngx-datatable-cell-template let-rowIndex="rowIndex">
+                            <span fxLayoutAlign="center center">{{value}}</span>
+                        </ng-template>
+                    </ngx-datatable-column>
+
                     </ngx-datatable>
                 </div>
             </mat-card>

@@ -67,51 +67,52 @@ export class DisciplinesRegisterComponent implements OnInit {
 
     idUser
       ? this.disciplineService
-        .listUserDiscipline(idUser.toString())!
-        .subscribe((resp) => {
-          this.listDiscipline = (resp.list as ListDisciplineResponse[]).map(
-            (item) => {
-              return {
-                description: item.discipline.description,
-                id: item.discipline.id,
-                idCourse: item.discipline.idCourse,
-                idCourseDiscipline: item.id,
-                name: item.discipline.name,
-                status: this.getStatus(item.status),
-                typeDiscipline: item.discipline.typeDiscipline,
-                workload: item.discipline.workload,
-              } as unknown as SystemDiscipline;
-            }
-          );
+          .listUserDiscipline(idUser.toString())!
+          .subscribe((resp) => {
+            this.listDiscipline = (resp.list as ListDisciplineResponse[]).map(
+              (item) => {
+                return {
+                  description: item.discipline.description,
+                  id: item.discipline.id,
+                  idCourse: item.discipline.idCourse,
+                  nameCourse: item.discipline.nameCourse,
+                  idCourseDiscipline: item.id,
+                  name: item.discipline.name,
+                  status: this.getStatus(item.status),
+                  typeDiscipline: item.discipline.typeDiscipline,
+                  workload: item.discipline.workload,
+                } as unknown as SystemDiscipline;
+              }
+            );
 
-          this.setStatus();
+            this.setStatus();
 
-          this.filterListDiscipline = this.listDiscipline;
-          this.authService.initAuthentication
-            ? this.dialog.open(DialogWelcomeComponent)
-            : null;
-        })
+            this.filterListDiscipline = this.listDiscipline;
+            this.authService.initAuthentication
+              ? this.dialog.open(DialogWelcomeComponent)
+              : null;
+          })
       : this.systemDisciplinesService
-        .listSystemDisciplines()
-        .subscribe((resp) => {
-          this.listDiscipline = (resp.list as SystemDiscipline[]).map(
-            (item) => {
-              return {
-                description: item.description,
-                id: item.id,
-                idCourse: item.idCourse,
-                idCourseDiscipline: item.id,
-                name: item.name,
-                status: this.getStatus(item.status),
-                typeDiscipline: item.typeDiscipline,
-                workload: item.workload,
-              } as unknown as SystemDiscipline;
-            }
-          );
+          .listSystemDisciplines()
+          .subscribe((resp) => {
+            this.listDiscipline = (resp.list as SystemDiscipline[]).map(
+              (item) => {
+                return {
+                  description: item.description,
+                  id: item.id,
+                  idCourse: item.idCourse,
+                  idCourseDiscipline: item.id,
+                  name: item.name,
+                  status: this.getStatus(item.status),
+                  typeDiscipline: item.typeDiscipline,
+                  workload: item.workload,
+                } as unknown as SystemDiscipline;
+              }
+            );
 
-          this.setStatus();
-          this.filterListDiscipline = this.listDiscipline;
-        });
+            this.setStatus();
+            this.filterListDiscipline = this.listDiscipline;
+          });
   }
 
   getStatus(status: number): string {
@@ -184,7 +185,9 @@ export class DisciplinesRegisterComponent implements OnInit {
   }
 
   isRowSelected(id: string) {
-    return false;
+    return this.listDisciplineSelected.some(
+      (discipline) => discipline.id == id
+    );
   }
 
   emitCompleted() {
@@ -213,10 +216,12 @@ export class DisciplinesRegisterComponent implements OnInit {
   }
 
   onRowClicked(event: any) {
-    if (event.type == 'click') {
+    if (event.type == 'dblclick') {
       let dialogRef = this.dialog.open(DialogViewDisciplineComponent);
       dialogRef.componentInstance.disciplineSelected =
         event.row as SystemDiscipline;
+    } else if (event.type == 'click') {
+      this.onSelect(event.row);
     }
   }
 }

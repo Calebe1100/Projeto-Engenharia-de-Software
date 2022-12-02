@@ -4,6 +4,7 @@ export interface SystemDiscipline {
   description: string;
   id: string;
   idCourse: number;
+  nameCourse: string;
   name: string;
   workload: number;
   status: DisciplineStatus;

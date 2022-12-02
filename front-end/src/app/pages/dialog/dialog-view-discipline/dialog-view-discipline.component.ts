@@ -14,62 +14,37 @@ export class DialogViewDisciplineComponent implements OnInit {
 
   sampleNodes = [
     {
-      id: 'start',
+      id: '1',
       label: 'Cálculo 1',
     },
     {
-      id: '1',
-      label: 'Cálculo 2',
-      coRequisitos: ["1", '2', '3'],
-      rank: 'first',
-    },
-    {
       id: '2',
-      label: 'Cálculo 3',
+      label: 'Cálculo 2',
       rank: 'first',
     },
     {
       id: '3',
-      label: 'Cálculo 4',
+      label: 'Cálculo 3',
+      rank: 'first',
     },
     {
       id: '4',
-      label: 'Controle Digital',
-    },
-    {
-      id: '5',
-      label: 'Lab Controle Digital',
-    },
-    {
-      id: '6',
-      label: 'IA',
+      label: 'Cálculo 4',
     },
   ];
 
   sampleLinks = [
     {
-      source: 'start',
-      target: '1',
-    },
-    {
-      source: 'start',
+      source: '1',
       target: '2',
     },
     {
-      source: '1',
+      source: '2',
       target: '3',
     },
     {
-      source: '2',
-      target: '4',
-    },
-    {
-      source: '2',
-      target: '6',
-    },
-    {
       source: '3',
-      target: '5',
+      target: '4',
     },
   ];
 

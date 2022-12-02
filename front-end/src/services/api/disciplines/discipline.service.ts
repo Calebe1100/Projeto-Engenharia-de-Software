@@ -20,14 +20,8 @@ export class DisciplineService extends ApiServiceTemplate {
   }
 
   listUserDiscipline(param: string) {
-    try{
-
-      const endPoint = `${DisciplineService.prefixApiLocal}/user-disciplines-course`;
-      return this.list(endPoint, { idUser: param });
-    } catch{
-
-      return;
-    }
+    const endPoint = `${DisciplineService.prefixApiLocal}/user-disciplines-course`;
+    return this.list(endPoint, { idUser: param });
   }
 
   postUserDiscipline(body: CreateDisciplineRequest) {
