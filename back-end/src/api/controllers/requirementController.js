@@ -5,12 +5,11 @@ async function findByDiscipline(req, res) {
 
   let listRequirement = [];
   RequirementRepository.findAll({ where: { idDiscipline: req.body.idDiscipline } }).then(data => {
-    data.forEach(requirement => {
-      RequirementRepository.findAll({ where: { idDiscipline: requirement.dataValues.idDisciplineRequired } }).then(discipline => {
-        listRequirement = discipline.dataValues;
-      })
-    })
-    listRequirement = [data, ...listRequirement];
+    // data?.forEach(requirement => {
+    //   RequirementRepository.findAll({ where: { idDiscipline: requirement.dataValues.idDisciplineRequired } }).then(discipline => {
+    //     listRequirement.push(discipline.dataValues);
+    //   })
+    // })
     res.send(data);
   })
     .catch(err => {
