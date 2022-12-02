@@ -42,6 +42,8 @@ export class DisciplinesRegisterComponent implements OnInit {
 
   dateTime = '';
 
+  userAuthenticated = false;
+
   constructor(
     public dialog: MatDialog,
     private readonly systemDisciplinesService: SystemDisciplinesService,
@@ -52,6 +54,10 @@ export class DisciplinesRegisterComponent implements OnInit {
     this.selected.push(this.filterListDiscipline[2]);
 
     this.dateTime = moment().format('MM/DD/YYYY HH:mm');
+
+    this.authService.userAuthentication.subscribe(
+      (resp) => (this.userAuthenticated = resp)
+    );
   }
 
   selected: SystemDiscipline[] = [];
@@ -59,49 +65,53 @@ export class DisciplinesRegisterComponent implements OnInit {
   ngOnInit(): void {
     const idUser = this.cookieService.getCookie('id');
 
-    idUser ?
-      this.disciplineService
-        .listUserDiscipline(idUser.toString())!
-        .subscribe((resp) => {
-          this.listDiscipline = (resp.list as ListDisciplineResponse[]).map(
-            (item) => {
-              return {
-                description: item.discipline.description,
-                id: item.discipline.id,
-                idCourse: item.discipline.idCourse,
-                idCourseDiscipline: item.id,
-                name: item.discipline.name,
-                status: this.getStatus(item.status),
-                typeDiscipline: item.discipline.typeDiscipline,
-                workload: item.discipline.workload,
-              } as unknown as SystemDiscipline;
-            }
-          );
-          this.filterListDiscipline = this.listDiscipline;
-  
-          this.setStatus();
-  
-          this.authService.initAuthentication
-            ? this.dialog.open(DialogWelcomeComponent)
-            : null;
-        }) :
-      this.systemDisciplinesService.listSystemDisciplines().subscribe(resp => {
-        this.listDiscipline = (resp.list as SystemDiscipline[]).map(
-          (item) => {
-            return {
-              description: item.description,
-              id: item.id,
-              idCourse: item.idCourse,
-              idCourseDiscipline: item.id,
-              name: item.name,
-              status: this.getStatus(item.status),
-              typeDiscipline: item.typeDiscipline,
-              workload: item.workload,
-            } as unknown as SystemDiscipline;
-          }
-        );
+    idUser
+      ? this.disciplineService
+          .listUserDiscipline(idUser.toString())!
+          .subscribe((resp) => {
+            this.listDiscipline = (resp.list as ListDisciplineResponse[]).map(
+              (item) => {
+                return {
+                  description: item.discipline.description,
+                  id: item.discipline.id,
+                  idCourse: item.discipline.idCourse,
+                  idCourseDiscipline: item.id,
+                  name: item.discipline.name,
+                  status: this.getStatus(item.status),
+                  typeDiscipline: item.discipline.typeDiscipline,
+                  workload: item.discipline.workload,
+                } as unknown as SystemDiscipline;
+              }
+            );
 
-      })
+            this.setStatus();
+
+            this.filterListDiscipline = this.listDiscipline;
+            this.authService.initAuthentication
+              ? this.dialog.open(DialogWelcomeComponent)
+              : null;
+          })
+      : this.systemDisciplinesService
+          .listSystemDisciplines()
+          .subscribe((resp) => {
+            this.listDiscipline = (resp.list as SystemDiscipline[]).map(
+              (item) => {
+                return {
+                  description: item.description,
+                  id: item.id,
+                  idCourse: item.idCourse,
+                  idCourseDiscipline: item.id,
+                  name: item.name,
+                  status: this.getStatus(item.status),
+                  typeDiscipline: item.typeDiscipline,
+                  workload: item.workload,
+                } as unknown as SystemDiscipline;
+              }
+            );
+
+            this.setStatus();
+            this.filterListDiscipline = this.listDiscipline;
+          });
   }
 
   getStatus(status: number): string {
@@ -140,26 +150,22 @@ export class DisciplinesRegisterComponent implements OnInit {
   }
 
   async updateResults() {
-    this.listDiscipline = this.searchByValue();
+    if (this.searchInputControl.value.trim() === '') {
+      this.filterListDiscipline = this.listDiscipline;
+    }
+    this.filterListDiscipline = this.searchByValue();
   }
 
   searchByValue() {
     return this.filterListDiscipline.filter((item) => {
-      if (this.searchInputControl.value.trim() === '') {
-        this.filterListDiscipline = this.listDiscipline;
-        return true;
-      } else {
-        return (
-          item.name
-            .toLowerCase()
-            .includes(
-              this.searchInputControl.value.trim().toLocaleLowerCase()
-            ) ||
-          item.name
-            .toLowerCase()
-            .includes(this.searchInputControl.value.trim().toLocaleLowerCase())
-        );
-      }
+      return (
+        item.name
+          .toLowerCase()
+          .includes(this.searchInputControl.value.trim().toLocaleLowerCase()) ||
+        item.name
+          .toLowerCase()
+          .includes(this.searchInputControl.value.trim().toLocaleLowerCase())
+      );
     });
   }
 

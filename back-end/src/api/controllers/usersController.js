@@ -1,7 +1,7 @@
+import moment from "moment";
 import * as yup from 'yup';
 import DisciplineRepository from "../../models/discipline.mjs";
 import UserRepository from "../../models/user.mjs";
-import moment from "moment";
 import UserCourseDisciplineRepository from "../../models/userCourseDiscipline.mjs";
 
 async function findAll(req, res) {

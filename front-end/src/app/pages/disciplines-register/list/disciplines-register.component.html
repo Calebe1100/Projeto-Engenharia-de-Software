@@ -11,11 +11,11 @@
     <div class="w-full min-w-50" fxLayoutAlign="center ">
         <div class="w-75 min-w-50" fxLayout="column" fxLayoutGap="10px">
             <mat-card class="w-full min-w-50 h-full">
-                <div *ngIf="listDiscipline; else noDisciplines" fxFill fxLayout="column">
-                    <ngx-datatable class="material " [rows]="listDiscipline"
+                <div *ngIf="filterListDiscipline; else noDisciplines" fxFill fxLayout="column">
+                    <ngx-datatable class="material " [rows]="filterListDiscipline"
                         [columnMode]="'force'"  [scrollbarV]="true"  [reorderable]="false"  [selected]="selected" [headerHeight]="40" (activate)="onRowClicked($event)"  [limit]="5">
                         
-                        <ngx-datatable-column [width]="3">
+                        <ngx-datatable-column [width]="3" *ngIf="userAuthenticated">
                             <ng-template
                             ngx-datatable-cell-template
                             let-row="row" >

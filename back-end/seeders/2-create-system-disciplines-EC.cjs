@@ -83,8 +83,6 @@ module.exports = {
  {
         id:uuidv4(), name: 'CÁLCULO IV', workload: 60, description: '7CECOM.038' , idCourse: 'ee714bf1-f558-4142-8fd0-c6a4933014eb', typeDiscipline: 1}, 
  {
-        id:uuidv4(), name: 'FÍSICA EXPERIMENTAL II', workload: 30, description: '7CECOM.01' , idCourse: 'ee714bf1-f558-4142-8fd0-c6a4933014eb', typeDiscipline: 1}, 
- {
         id:uuidv4(), name: 'BANCO DE DADOS I', workload: 60, description: '7CECOM.04' , idCourse: 'ee714bf1-f558-4142-8fd0-c6a4933014eb', typeDiscipline: 1}, 
  {
         id:uuidv4(), name: 'LABORATÓRIO DE BANCO DE DADOS I', workload: 30, description: '7CECOM.045' , idCourse: 'ee714bf1-f558-4142-8fd0-c6a4933014eb', typeDiscipline: 1}, 
