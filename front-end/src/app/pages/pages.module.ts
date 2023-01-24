@@ -19,6 +19,7 @@ import { DialogDisciplinesComponent } from './dialog/dialog-disciplines/dialog-d
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
 import { SettingsComponent } from './settings/settings.component';
+import { DialogWelcomeComponent } from './dialog/dialog-welcome/dialog-welcome.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { SettingsComponent } from './settings/settings.component';
     DisciplinesRegisterComponent,
     DialogDisciplinesComponent,
     SettingsComponent,
+    DialogWelcomeComponent,
   ],
   imports: [
     CommonModule,
@@ -44,6 +46,7 @@ import { SettingsComponent } from './settings/settings.component';
     MatCardModule,
     MatDialogModule,
     NgxDatatableModule,
+    MatMenuModule,
   ],
   exports: [],
 })

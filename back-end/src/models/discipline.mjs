@@ -1,9 +1,10 @@
 import { DataTypes } from "sequelize";
-import db from "./db.js";
+import Course from "./course.mjs";
+import db from "./db.mjs";
 
-export default db.define("course", {
+ const discipline = db.define("discipline", {
   id: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
   },
@@ -11,15 +12,11 @@ export default db.define("course", {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  mandatory_workload: {
+  workload: {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-  optional_workload: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
-  complementary_workload: {
+  typeDiscipline: {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
@@ -40,3 +37,19 @@ export default db.define("course", {
 
   freezeTableName: true
 });
+
+discipline.belongsTo(Course, {
+  constraint: true,
+  foreignKey: 'idCourse',
+  onDelete: 'CASCADE',
+  allowNull: false,
+});
+
+Course.hasMany(discipline, {
+  constraint: true,
+  foreignKey: 'idCourse',
+  onDelete: 'CASCADE',
+  allowNull: false,
+});
+
+export default discipline;

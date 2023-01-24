@@ -7,7 +7,7 @@ import { SettingsComponent } from './pages/settings/settings.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
 
 const routes: Routes = [
-  { path: '', component: AccountComponent },
+  { path: '', component: HomeComponent },
   { path: 'account', component: AccountComponent },
   { path: 'sign-up', component: SignUpComponent },
   { path: 'disciplines-register', component: HomeComponent },
@@ -18,4 +18,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

@@ -1,28 +1,31 @@
 import { DataTypes } from "sequelize";
-import db from "./db.js";
+import db from "./db.mjs";
 
- const discipline = db.define("discipline", {
+const Course = db.define("course", {
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
   },
   name: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(100),
     allowNull: false,
   },
-  workload: {
+  mandatory_workload: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  optional_workload: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  complementary_workload: {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
   description: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(255),
     allowNull: true,
-  },
-  idCourse: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
-    primaryKey: true,
   }
 }, 
 {
@@ -38,4 +41,4 @@ import db from "./db.js";
   freezeTableName: true
 });
 
-export default discipline;
+export default Course;

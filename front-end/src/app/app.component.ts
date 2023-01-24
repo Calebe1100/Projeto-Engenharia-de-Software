@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToolbarService } from 'src/services/shared/toolbarService';
 
 @Component({
   selector: 'app-root',
@@ -7,8 +9,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'cefet_road_map';
+  showToolbar = true;
 
-  get currentYear(): number {
-    return new Date().getFullYear();
-  }
+  constructor(public readonly toolbarService: ToolbarService) {}
 }

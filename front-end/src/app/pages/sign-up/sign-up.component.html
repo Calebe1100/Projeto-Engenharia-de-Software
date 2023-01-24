@@ -42,6 +42,15 @@
         </div>
 
         <div class="form-group">
+            <label for="exampleInputPassword1" class="mr-3">Curso</label>
+        <select formControlName="course" class="form-control">
+            <option *ngFor="let course of courses" [ngValue]="course.id">
+              {{ course.name }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
             <label for="exampleInputPassword1" class="mr-3">Período</label>
         <select formControlName="period" class="form-control">
             <option *ngFor="let period of periods" [ngValue]="period">
@@ -49,6 +58,7 @@
             </option>
           </select>
         </div>
+
         <div class="buttons-submit">
             <button type="submit"  class="btn btn-primary mr-3" routerLink="/sign-up" >Registre-se </button>
             <a routerLink="/account" >Entrar</a>    

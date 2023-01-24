@@ -1,38 +1,37 @@
 import { DataTypes } from "sequelize";
-import db from "./db.js";
+import db from "./db.mjs";
 
-export default db.define("user", {
+const User = db.define("user", {
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
   },
   name: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(100),
     allowNull: false,
   },
   email: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(255),
     allowNull: false,
     unique: true,
   },
   password: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(20),
     allowNull: false,
-    unique: true,
   },
   registration: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(11),
     allowNull: false,
   },
   birth_date: {
     type: DataTypes.DATEONLY,
-    allowNull: false,
-  },
-  period: {
-    type: DataTypes.STRING,
     allowNull: true,
   },
+  period: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+  }
 }, 
 {
   // don't add the timestamp attributes (updatedAt, createdAt)
@@ -46,3 +45,5 @@ export default db.define("user", {
 
   freezeTableName: true
 });
+
+export default User;
