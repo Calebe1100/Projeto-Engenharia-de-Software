@@ -12,29 +12,20 @@
         <div class="w-75 min-w-50" fxLayout="column" fxLayoutGap="10px">
             <mat-card class="w-full min-w-50 h-full">
                 <div *ngIf="filterListDiscipline; else noDisciplines" fxFill fxLayout="column">
-                    <ngx-datatable class="material " [rows]="filterListDiscipline"
-                        [columnMode]="'force'"  [scrollbarV]="true"  [reorderable]="false"  [selected]="selected" [headerHeight]="40" (activate)="onRowClicked($event)"  [limit]="5">
+                    <ngx-datatable class="material" [rows]="filterListDiscipline"
+                    rowHeight="auto" [headerHeight]="50"
+                    [columnMode]="ColumnMode.standard"
+                    [selectionType]="SelectionType.multiClick"
+                    [footerHeight]="50"  [reorderable]="false"
+                    [selected]="selected" [headerHeight]="40" (activate)="onRowClicked($event)"  [limit]="5">
                         
-                        <ngx-datatable-column [width]="3" *ngIf="userAuthenticated">
-                            <ng-template
-                            ngx-datatable-cell-template
-                            let-row="row" >
-                                <input
-                                fxLayoutAlign="center center"
-                                    type="checkbox"
-                                    (click)='onSelect(row)'
-                                    [checked]="isRowSelected(row.id)"
-                                    />
-                            </ng-template>
-                        </ngx-datatable-column>
-
-                        <ngx-datatable-column name="Name" [flexGrow]="1.5">
+                        <ngx-datatable-column name="Name" [width]="500" >
                             <ng-template ngx-datatable-header-template>
                                 Nome
                             </ng-template>
                         </ngx-datatable-column>
 
-                        <ngx-datatable-column name="workload" [flexGrow]="1.5">
+                        <ngx-datatable-column name="workload">
                             <ng-template ngx-datatable-header-template>
                                 <span fxLayoutAlign="center center">Carga Horária</span>
                             </ng-template>
@@ -45,7 +36,7 @@
                             </ng-template>
                         </ngx-datatable-column>
 
-                        <ngx-datatable-column name="descriptionDiscipline" [flexGrow]="1.5">
+                        <ngx-datatable-column name="descriptionDiscipline">
                             <ng-template ngx-datatable-header-template>
                                 <span fxLayoutAlign="center center">Tipo da disciplina</span>
                             </ng-template>
@@ -57,7 +48,7 @@
                         </ngx-datatable-column>
 
                         <ngx-datatable-column *ngIf="(authService.userAuthentication|async)" name="status"
-                            [flexGrow]="1.5">
+                            >
                             <ng-template ngx-datatable-header-template>
                                 <span fxLayoutAlign="center center">Status</span>
                             </ng-template>
@@ -69,7 +60,7 @@
                         </ngx-datatable-column>
 
                         <ngx-datatable-column  name="nameCourse" *ngIf="(authService.userAuthentication|async)"
-                        [flexGrow]="1.5" >
+                       >
                         <ng-template ngx-datatable-header-template>
                             <span fxLayoutAlign="center center">Curso</span>
                         </ng-template>
