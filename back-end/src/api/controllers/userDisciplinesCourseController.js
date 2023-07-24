@@ -65,10 +65,12 @@ async function deleteById(req, res) {
 async function store(req, res) {
 
   let schema = yup.object({
-    idDiscipline: yup.string().required(),
+    description: yup.string().required(),
     idCourse: yup.string().required(),
-    idUser: yup.string().required(),
+    idDiscipline: yup.string().required(),
+    idUser: yup.string().optional(),
     status: yup.number().required(),
+    typeDiscipline: yup.number().optional(),
   });
 
   if (!(await schema.isValid(req.body))) {
