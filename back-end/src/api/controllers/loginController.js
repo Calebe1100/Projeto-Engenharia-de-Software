@@ -28,9 +28,9 @@ async function login(req, res) {
         
       },
       token: jwt.sign(
-        {id: userExist._id}, 
-        process.env.SECRET_JWT_KEY, 
-        {expiresIn: process.env.EXPIRE_IN_JWT} 
+        {id: userExist.id}, 
+        process.env.SECRET_KEY, 
+        {expiresIn: process.env.EXPIRE_IN_KEY} 
       )
     })
     
